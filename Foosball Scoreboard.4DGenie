@@ -1,0 +1,236 @@
+﻿Version     0.0
+Platform    uLCD-43PT-L
+PlatRes     272x480
+Depends
+end
+Options
+    Genie
+    Speed                        115200
+    Checksum                     No
+    ResponseSize                 2
+    Multidrop                    No
+    Destination                  1
+    SndBuf                       0
+end
+Form
+    Name                         Form0
+    Bgtype                       Color
+    Color                        BLACK
+    Image                        (None)
+    Source.Height                0
+    Source.Left                  0
+    Source.Top                   0
+    Source.Width                 0
+    OnActivate                   ''
+    OnCreate                     ''
+    OnRepeat                     ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits0
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       155
+    LeadingZero                  Yes
+    Left                         16
+    OutlineColor                 BLACK
+    Palette.High                 YELLOW
+    Palette.Low                  0x001514
+    Top                          4
+    Visible                      Yes
+    Width                        125
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits1
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       155
+    LeadingZero                  Yes
+    Left                         355
+    OutlineColor                 BLACK
+    Palette.High                 WHITE
+    Palette.Low                  0x0D0D0D
+    Top                          4
+    Visible                      Yes
+    Width                        125
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits2
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       99
+    LeadingZero                  Yes
+    Left                         132
+    OutlineColor                 BLACK
+    Palette.High                 clLime
+    Palette.Low                  0x001400
+    Top                          164
+    Visible                      Yes
+    Width                        79
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits3
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       99
+    LeadingZero                  Yes
+    Left                         272
+    OutlineColor                 BLACK
+    Palette.High                 clLime
+    Palette.Low                  0x001400
+    Top                          164
+    Visible                      Yes
+    Width                        79
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext0
+    AutoSize                     Yes
+    Caption                      -
+    Color                        BLACK
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    65
+    Font.Style                   []
+    Height                       105
+    Left                         220
+    Top                          156
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        32
+    WordWrap                     Yes
+end
+Strings
+    Name                         Strings0
+    Alignment                    Center
+    BGcolor                      BLACK
+    Height                       64
+    FGcolor                      WHITE
+    Font.Bold                    Yes
+    Font.CharSet                 ANSI
+    Font.Italic                  No
+    Font.Name                    Arial
+    Font.Opaque                  Yes
+    Font.Size                    19
+    Font.Strikethrough           No
+    Font.Underline               No
+    Left                         136
+    Strings                      Initializing...
+    StringsStyle                 Message
+    Top                          4
+    Visible                      Yes
+    Width                        208
+    OnChanged                    ''
+end
+LedDigits
+    Name                         Leddigits4
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       52
+    LeadingZero                  Yes
+    Left                         152
+    OutlineColor                 BLACK
+    Palette.High                 RED
+    Palette.Low                  0x000531
+    Top                          76
+    Visible                      Yes
+    Width                        86
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits5
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       52
+    LeadingZero                  Yes
+    Left                         248
+    OutlineColor                 BLACK
+    Palette.High                 RED
+    Palette.Low                  0x000531
+    Top                          76
+    Visible                      Yes
+    Width                        86
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext1
+    AutoSize                     Yes
+    Caption                      :
+    Color                        BLACK
+    Font.Color                   RED
+    Font.Effects                 []
+    Font.Name                    Consolas
+    Font.Size                    24
+    Font.Style                   []
+    Height                       37
+    Left                         232
+    Top                          80
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        18
+    WordWrap                     Yes
+end
+Form
+    Name                         Form1
+    Bgtype                       Color
+    Color                        BLACK
+    Image                        (None)
+    Source.Height                0
+    Source.Left                  0
+    Source.Top                   0
+    Source.Width                 0
+    OnActivate                   ''
+    OnCreate                     ''
+    OnRepeat                     ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext2
+    AutoSize                     Yes
+    Caption                      'Form 1'
+    Color                        BLACK
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    9
+    Font.Style                   []
+    Height                       14
+    Left                         189
+    Top                          73
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        38
+    WordWrap                     Yes
+end

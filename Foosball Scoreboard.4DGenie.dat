@@ -1,0 +1,15 @@
+"Leddigits0" 0000 0000 10 04
+"iLeddigits0" 9800 0000 10 04
+"Leddigits1" 1000 0006 163 04
+"iLeddigits1" A800 0006 163 04
+"Leddigits2" 2000 000C 84 A4
+"iLeddigits2" 5E00 000C 84 A4
+"Leddigits3" 9000 000E 110 A4
+"iLeddigits3" CE00 000E 110 A4
+"Statictext0" 0000 0011 DC 9C
+"Leddigits4" 1C00 0011 90 4C
+"iLeddigits4" 4000 0011 90 4C
+"Leddigits5" E200 0011 F0 4C
+"iLeddigits5" 0600 0012 F0 4C
+"Statictext1" A800 0012 E0 50
+"Statictext2" AE00 0012 BD 49

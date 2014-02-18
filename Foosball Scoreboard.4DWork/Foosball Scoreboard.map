@@ -1,0 +1,10 @@
+linked : 10    main 0146
+linked : 9     DoGFXObjects 06EC
+skipped: 8     UpdateObjects ----
+linked : 7     ActivateForm 06ED
+linked : 6     ledDigitsDisplay 084D
+linked : 5     WriteObject 0987
+linked : 4     ReadObject 0A14
+linked : 3     seroutOcs 0ABB
+linked : 2     seroutCS 0ACA
+linked : 1     PrintStrings 0ADC
