@@ -22,11 +22,12 @@ long loopCycleCount = 0;
 volatile boolean updateClockFlag = false;
 volatile int clockSeconds;
 volatile int clockMinutes;
+int displayedMinutes = 0;                    // Keep track of current minute is to optimize serial calls.
 int pulseCount;
 
 /* Game config variables. */
 const int POINTS_PER_MATCH = 5;
-const int AFTER_ROUND_PAUSE_MSEC = 9000;    // The amount of time to freeze the scoreboard after each round, in milliseconds.
+const int AFTER_ROUND_PAUSE_MSEC = 9000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
 
 void setup()
 {
@@ -215,7 +216,13 @@ void clockTick()
  */
 void updateClockDisplay()
 {
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 4, clockMinutes);
+  // Only fire off the serial call to update the minute display if it's actually changing.
+  if (displayedMinutes != clockMinutes)
+  {
+    displayedMinutes = clockMinutes;
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 4, displayedMinutes);
+  }
+  
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 5, clockSeconds);
   updateClockFlag = false;
 }
