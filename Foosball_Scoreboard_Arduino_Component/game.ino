@@ -27,18 +27,15 @@ void updateMatchScores()
   }
   
   // Update the scoreboard to reflect the end of this match.
-  if (!invertedRound)
-  {
-    // Player 0 is on left, player 1 is on right.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[0].matchesWon);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[1].matchesWon);
-  }
-  else
-  {
-    // Player 1 is on right, player 0 is on left.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[1].matchesWon);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[0].matchesWon);
-  }
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  
+  playerData[0].totalScore += playerData[0].matchScore;
+  playerData[1].totalScore += playerData[1].matchScore;
+  
+  // Play the match winning sound.
+  genieWriteObject(GENIE_OBJ_SOUND, 0, 1);
+  delay(AFTER_ROUND_PAUSE_MSEC);
   
   // End the tournament if somebody won.
   if (playerData[0].matchesWon == TOURNAMENT_WIN_LIMIT || playerData[1].matchesWon == TOURNAMENT_WIN_LIMIT)
@@ -47,23 +44,9 @@ void updateMatchScores()
     return;
   }
   
-  // Play the match winning sound.
-  genieWriteObject(GENIE_OBJ_SOUND, 0, 1);
-  delay(AFTER_ROUND_PAUSE_MSEC);
-  
   // Show a swapped match score for when the players switch sides.
-  if (invertedRound)
-  {
-    // Player A is on left, player B is on right.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[0].matchesWon);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[1].matchesWon);
-  }
-  else
-  {
-    // Player A is on right, player B is on left.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[1].matchesWon);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[0].matchesWon);
-  }
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
   
   // Tell the player who should put the ball in.
   if (colorWinner == YELLOW)
@@ -75,12 +58,31 @@ void updateMatchScores()
     genieWriteStr(0, "Ready.\nBlack, put in ball.");
   }
   
-  // Clear the main scoreboard.
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, 0);
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, 0);
-  playerData[0].matchScore = 0;
-  playerData[1].matchScore = 0;
+  // Clear the scores.
+  for (int i = 0; i < 2; i++)
+  {
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, i, 0);
+    playerData[i].matchScore = 0;
+  }
+  
   invertedRound = !invertedRound;
+}
+
+/**
+ * Gets the array index for the given color and game state.
+ * @param inverted: Whether or not the match is inverted (pass invertedRound here).
+ * @param color: The color to get the index for. YELLOW or BLACK are valid constants here.
+ */
+int getArrayIndexForColor(boolean inverted, int color)
+{
+  if ((inverted && color == YELLOW) || (!inverted && color == BLACK))
+  {
+    return 1;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 /*
@@ -92,5 +94,12 @@ void endTournament()
   
   // Play the tournament win sound & show the stats form.
   genieWriteObject(GENIE_OBJ_SOUND, 0, 2);
+  
+  // Populate & show the postgame stats form.
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 6, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].totalScore);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 7, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].totalScore);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 8, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 9, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  
   genieWriteObject(GENIE_OBJ_FORM, 1, 0);
 }

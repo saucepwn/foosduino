@@ -22,7 +22,7 @@ volatile boolean updateClockFlag = false;
 
 /* Game config variables. */
 const int POINTS_PER_MATCH = 5;
-const int TOURNAMENT_WIN_LIMIT = 1;          // How many games a player has to win before winning the tournament.
+const int TOURNAMENT_WIN_LIMIT = 2;          // How many games a player has to win before winning the tournament.
 const int AFTER_ROUND_PAUSE_MSEC = 9000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
 const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
 
@@ -94,14 +94,7 @@ void pollForScore()
     stopClock(false);
     ballInPlay = 0;
     
-    if (invertedRound) 
-    {
-      score = ++playerData[0].matchScore;
-    }
-    else
-    {
-      score = ++playerData[1].matchScore;
-    }
+    score = ++playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchScore;
     
     genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, score);
     if (score != POINTS_PER_MATCH) genieWriteStr(0, "Black scores!");
@@ -111,14 +104,7 @@ void pollForScore()
     stopClock(false);
     ballInPlay = 0;
     
-    if (invertedRound)
-    {
-      score = ++playerData[1].matchScore;
-    }
-    else
-    {
-      score = ++playerData[0].matchScore;
-    }
+    score = ++playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchScore;
     
     genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, score);
     if (score != POINTS_PER_MATCH) genieWriteStr(0, "Yellow scores!");
