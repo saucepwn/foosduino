@@ -200,6 +200,12 @@ StaticText
     Width                        18
     WordWrap                     Yes
 end
+Sounds
+    Name                         Sounds0
+    WavFiles                     smb_po!1.wav\nsmb_wo!1.wav\nsmb_st!1.wav
+    OnPlayingChanged             ''
+    OnVolumeChanged              ''
+end
 Form
     Name                         Form1
     Bgtype                       Color
