@@ -340,7 +340,7 @@ StaticText
     Font.Style                   []
     Height                       22
     Left                         192
-    Top                          56
+    Top                          52
     Transparent                  Yes
     Visible                      Yes
     Width                        92

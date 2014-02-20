@@ -100,6 +100,24 @@ void endTournament()
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 7, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].totalScore);
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 8, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 9, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+
+  // Make sure we don't divide by zero on the line below.  
+  if (playerData[0].totalScore == 0 && playerData[1].totalScore == 0)
+  {
+    playerData[0].totalScore = 1;
+  }
+  
+  // Calculate and display the average time per score.
+  int avgScoreSecs = (int) ( totalGameSeconds / ( playerData[0].totalScore + playerData[1].totalScore ) );
+  int avgScoreMins = 0;
+  if (avgScoreSecs >= 60)
+  {
+    avgScoreMins = (int) (avgScoreSecs / 60);
+    avgScoreSecs = avgScoreSecs % 60;
+  }
+  
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 10, avgScoreMins);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 11, avgScoreSecs);
   
   genieWriteObject(GENIE_OBJ_FORM, 1, 0);
 }

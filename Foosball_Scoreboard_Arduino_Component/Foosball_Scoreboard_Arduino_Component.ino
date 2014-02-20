@@ -10,10 +10,9 @@ const int ballInsertPin = 10;
 const int ledPin =  13;
 
 /* Game status variables. */
-int playerARounds = 0;
-int playerBRounds = 0;
 int ballInPlay = 0;
 boolean invertedRound = false;                       // Set to false when player 0 is yellow. Set to true when player 0 is black.
+int totalGameSeconds = 0;
 
 /* Clock variables / config */
 const long UPDATE_CLOCK_CYCLES = 10000;      // Check for the update clock flag every 10,000 cycles.
@@ -22,7 +21,7 @@ volatile boolean updateClockFlag = false;
 
 /* Game config variables. */
 const int POINTS_PER_MATCH = 5;
-const int TOURNAMENT_WIN_LIMIT = 2;          // How many games a player has to win before winning the tournament.
+const int TOURNAMENT_WIN_LIMIT = 1;          // How many games a player has to win before winning the tournament.
 const int AFTER_ROUND_PAUSE_MSEC = 9000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
 const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
 

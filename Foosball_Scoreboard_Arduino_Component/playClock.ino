@@ -32,6 +32,8 @@ void clockTick()
   if (pulseCount == 489)  // 490Hz reached
   {
     clockSeconds++;
+    totalGameSeconds++;
+    
     if (clockSeconds == 60)
     {
       clockMinutes++;
