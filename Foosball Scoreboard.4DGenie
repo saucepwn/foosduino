@@ -10,7 +10,7 @@ Options
     ResponseSize                 2
     Multidrop                    No
     Destination                  1
-    SndBuf                       0
+    SndBuf                       1
 end
 Form
     Name                         Form0
@@ -225,18 +225,240 @@ end
 StaticText
     Name                         Statictext2
     AutoSize                     Yes
-    Caption                      'Form 1'
+    Caption                      Postgame
+    Color                        BLACK
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Arial
+    Font.Size                    22
+    Font.Style                   [Bold]
+    Height                       34
+    Left                         168
+    Top                          0
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        139
+    WordWrap                     Yes
+end
+LedDigits
+    Name                         Leddigits6
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       91
+    LeadingZero                  Yes
+    Left                         8
+    OutlineColor                 BLACK
+    Palette.High                 YELLOW
+    Palette.Low                  0x003432
+    Top                          56
+    Visible                      Yes
+    Width                        128
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits7
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       91
+    LeadingZero                  Yes
+    Left                         352
+    OutlineColor                 BLACK
+    Palette.High                 WHITE
+    Palette.Low                  0x212121
+    Top                          56
+    Visible                      Yes
+    Width                        128
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits8
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       99
+    LeadingZero                  Yes
+    Left                         12
+    OutlineColor                 BLACK
+    Palette.High                 clLime
+    Palette.Low                  0x001400
+    Top                          168
+    Visible                      Yes
+    Width                        79
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+LedDigits
+    Name                         Leddigits9
+    Color                        BLACK
+    Decimals                     0
+    Digits                       1
+    Height                       99
+    LeadingZero                  Yes
+    Left                         400
+    OutlineColor                 BLACK
+    Palette.High                 clLime
+    Palette.Low                  0x001400
+    Top                          168
+    Visible                      Yes
+    Width                        79
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+Rectangle
+    Name                         Rectangle0
+    Color                        WHITE
+    Filled                       Yes
+    Height                       5
+    Left                         141
+    Outlined                     Yes
+    OutlineColor                 WHITE
+    Pattern                      Fine
+    Top                          77
+    Width                        200
+end
+StaticText
+    Name                         Statictext3
+    AutoSize                     Yes
+    Caption                      'Goals scored'
     Color                        BLACK
     Font.Color                   WHITE
     Font.Effects                 []
     Font.Name                    Tahoma
-    Font.Size                    9
+    Font.Size                    12
     Font.Style                   []
-    Height                       14
-    Left                         189
-    Top                          73
+    Height                       22
+    Left                         192
+    Top                          56
     Transparent                  Yes
     Visible                      Yes
-    Width                        38
+    Width                        92
     WordWrap                     Yes
+end
+Rectangle
+    Name                         Rectangle1
+    Color                        WHITE
+    Filled                       Yes
+    Height                       5
+    Left                         112
+    Outlined                     Yes
+    OutlineColor                 WHITE
+    Pattern                      Fine
+    Top                          259
+    Width                        254
+end
+StaticText
+    Name                         Statictext4
+    AutoSize                     Yes
+    Caption                      'Matches won'
+    Color                        BLACK
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    12
+    Font.Style                   []
+    Height                       19
+    Left                         192
+    Top                          236
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        91
+    WordWrap                     Yes
+end
+LedDigits
+    Name                         Leddigits10
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       52
+    LeadingZero                  Yes
+    Left                         148
+    OutlineColor                 BLACK
+    Palette.High                 RED
+    Palette.Low                  0x000531
+    Top                          148
+    Visible                      Yes
+    Width                        86
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext5
+    AutoSize                     Yes
+    Caption                      :
+    Color                        BLACK
+    Font.Color                   RED
+    Font.Effects                 []
+    Font.Name                    Consolas
+    Font.Size                    24
+    Font.Style                   []
+    Height                       37
+    Left                         228
+    Top                          156
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        18
+    WordWrap                     Yes
+end
+LedDigits
+    Name                         Leddigits11
+    Color                        BLACK
+    Decimals                     0
+    Digits                       2
+    Height                       52
+    LeadingZero                  Yes
+    Left                         244
+    OutlineColor                 BLACK
+    Palette.High                 RED
+    Palette.Low                  0x000531
+    Top                          148
+    Visible                      Yes
+    Width                        86
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext6
+    AutoSize                     Yes
+    Caption                      'Avg score time'
+    Color                        BLACK
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    12
+    Font.Style                   []
+    Height                       21
+    Left                         188
+    Top                          112
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        110
+    WordWrap                     Yes
+end
+Rectangle
+    Name                         Rectangle2
+    Color                        WHITE
+    Filled                       Yes
+    Height                       6
+    Left                         175
+    Outlined                     Yes
+    OutlineColor                 WHITE
+    Pattern                      Fine
+    Top                          134
+    Width                        129
 end

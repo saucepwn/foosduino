@@ -1,0 +1,18 @@
+boolean invertedRound = 0;     // Set to 0 when player 0 is yellow. Set to 1 when player 0 is black.
+
+typedef struct
+{
+  int matchScore;
+  int totalScore;
+  int matchesWon;
+} player;
+
+
+
+R	|	Y	B	|  IR
+----|-----------|-----
+0	|	0	1	|	0
+1	|	1	0	|	1
+2	|	0	1	|	0
+3	|	1	0	|	1
+4	|	0	1	|	0

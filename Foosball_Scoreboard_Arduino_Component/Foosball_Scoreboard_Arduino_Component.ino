@@ -10,11 +10,10 @@ const int ballInsertPin = 10;
 const int ledPin =  13;
 
 /* Game status variables. */
-int blackScore = 0;
-int yellowScore = 0;
 int playerARounds = 0;
 int playerBRounds = 0;
 int ballInPlay = 0;
+boolean invertedRound = false;                       // Set to false when player 0 is yellow. Set to true when player 0 is black.
 
 /* Clock variables / config */
 const long UPDATE_CLOCK_CYCLES = 10000;      // Check for the update clock flag every 10,000 cycles.
@@ -23,7 +22,22 @@ volatile boolean updateClockFlag = false;
 
 /* Game config variables. */
 const int POINTS_PER_MATCH = 5;
+const int TOURNAMENT_WIN_LIMIT = 1;          // How many games a player has to win before winning the tournament.
 const int AFTER_ROUND_PAUSE_MSEC = 9000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
+const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
+
+/* Enums */
+const int YELLOW = 0;
+const int BLACK = 1;
+
+typedef struct
+{
+  int matchScore;
+  int totalScore;
+  int matchesWon;
+} player;
+
+player playerData[2];
 
 void setup()
 {
@@ -35,6 +49,7 @@ void setup()
   // Set up the LED pin to be an output:
   pinMode(ledPin, OUTPUT);
   
+  initGame();
   initDisplay();
 }
  
@@ -49,6 +64,7 @@ void loop()
     if (updateClockFlag) updateClockDisplay();
     loopCycleCount = 0;
   }
+  
   loopCycleCount++;
 }
 
@@ -71,119 +87,57 @@ void pollForBallInsert()
  */
 void pollForScore()
 {
+  int score;
+  
   if (digitalRead(blackScorePin) == LOW)
   {
     stopClock(false);
     ballInPlay = 0;
     
-    blackScore++;
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, blackScore);
-    if (blackScore != POINTS_PER_MATCH) genieWriteStr(0, "Black scores!");
+    if (invertedRound) 
+    {
+      score = ++playerData[0].matchScore;
+    }
+    else
+    {
+      score = ++playerData[1].matchScore;
+    }
+    
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, score);
+    if (score != POINTS_PER_MATCH) genieWriteStr(0, "Black scores!");
   }
   else if (digitalRead(yellowScorePin) == LOW)
   {
     stopClock(false);
     ballInPlay = 0;
     
-    yellowScore++;
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, yellowScore);
-    if (yellowScore != POINTS_PER_MATCH) genieWriteStr(0, "Yellow scores!");
+    if (invertedRound)
+    {
+      score = ++playerData[1].matchScore;
+    }
+    else
+    {
+      score = ++playerData[0].matchScore;
+    }
+    
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, score);
+    if (score != POINTS_PER_MATCH) genieWriteStr(0, "Yellow scores!");
+  }
+  else
+  {
+    // Nobody has scored, return since the following code should only be ran if a player wins.
+    return;
   }
   
   // Check to see if the match is over.
-  if (blackScore == POINTS_PER_MATCH)
+  if (playerData[0].matchScore == POINTS_PER_MATCH || playerData[1].matchScore == POINTS_PER_MATCH)
   {
-    genieWriteStr(0, "Black wins this round!\nPlease switch sides.");
-    updateMatchScores(1);
-  }
-  else if (yellowScore == POINTS_PER_MATCH)
-  {
-    genieWriteStr(0, "Yellow wins this round!\nPlease switch sides.");
-    updateMatchScores(0);
-  }
-}
-
-/**
- * Updates the match scoreboard at the bottom of the screen after a player wins a match.
- * @param winningTeam The team that just won. 0 for yellow, 1 for black.
- */
-void updateMatchScores(int winningTeam)
-{
-  int totalRoundsPlayed = playerARounds + playerBRounds;
-  boolean oddRound = (boolean) (totalRoundsPlayed % 2);
-  
-  if (!oddRound && winningTeam == 0 || oddRound && winningTeam == 1)
-  {
-    playerARounds++;
+    genieWriteStr(0, "Round over!\nPlease switch sides.");
+    updateMatchScores();
   }
   else
   {
-    playerBRounds++;
+    // Index 0 means play sound, sound 0 is the goal score sound.
+    genieWriteObject(GENIE_OBJ_SOUND, 0, 0);
   }
-  
-  // Update the scoreboard to reflect the end of this match.
-  if (!oddRound)
-  {
-    // Player A is on left, player B is on right.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerARounds);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerBRounds);
-  }
-  else
-  {
-    // Player A is on right, player B is on left.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerBRounds);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerARounds);
-  }
-  
-  // Give teams a chance to switch sides.
-  delay(AFTER_ROUND_PAUSE_MSEC);
-  
-  // Show a swapped match score for when the players switch sides.
-  if (oddRound)
-  {
-    // Player A is on left, player B is on right.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerARounds);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerBRounds);
-  }
-  else
-  {
-    // Player A is on right, player B is on left.
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerBRounds);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerARounds);
-  }
-  
-  // Clear the main scoreboard.
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, 0);
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, 0);
-  yellowScore = 0;
-  blackScore = 0;
-  
-  // Tell the player who should put the ball in.
-  if (winningTeam == 0)
-  {
-    genieWriteStr(0, "Ready.\nYellow, put in ball.");
-  }
-  else
-  {
-    genieWriteStr(0, "Ready.\nBlack, put in ball.");
-  }
-}
-
-/**
- * Initializes the Genie LCD display.
- */
-void initDisplay()
-{
-  genieBegin (GENIE_SERIAL, 115200);
-  //genieAttachEventHandler(myEventHandler);
-  
-  // ResetSend a reset signal to the display then wait for it to come up.
-  pinMode(displayResetPin, OUTPUT);
-  digitalWrite(displayResetPin, 1);
-  delay(100);
-  digitalWrite(displayResetPin, 0);
-  delay(3000);
-  
-  genieWriteStr(0, "Ready");
-  genieWriteObject(GENIE_OBJ_FORM, 0, 0);  // Select form 0 (the scoreboard).
 }

@@ -1,4 +1,4 @@
-// File generated 2/17/2014 8:19:42 PM
+// File generated 2/19/2014 10:15:33 PM
 // Warning! This is a generated file, any manual changes will be
 // lost during the next generation.
 
@@ -21,6 +21,22 @@
     iiLeddigits5    // offset 0x120600
     iStatictext1    // offset 0x12A800
     iStatictext2    // offset 0x12AE00
+    iLeddigits6     // offset 0x12D400
+    iiLeddigits6    // offset 0x133000
+    iLeddigits7     // offset 0x14D800
+    iiLeddigits7    // offset 0x153400
+    iLeddigits8     // offset 0x16DC00
+    iiLeddigits8    // offset 0x171A00
+    iLeddigits9     // offset 0x194C00
+    iiLeddigits9    // offset 0x198A00
+    iStatictext3    // offset 0x1BBC00
+    iStatictext4    // offset 0x1BCC00
+    iLeddigits10    // offset 0x1BDA00
+    iiLeddigits10   // offset 0x1BFE00
+    iStatictext5    // offset 0x1CA000
+    iLeddigits11    // offset 0x1CA600
+    iiLeddigits11   // offset 0x1CCA00
+    iStatictext6    // offset 0x1D6C00
 #END
 
 #constant  Strings0StartH   0x0
