@@ -15,15 +15,15 @@ void updateMatchScores()
   {
     playerData[0].matchesWon++;
     
-    if (invertedRound) colorWinner = YELLOW;
-    else colorWinner = BLACK;
+    if (invertedRound) colorWinner = BLACK;
+    else colorWinner = YELLOW;
   }
   else
   {
     playerData[1].matchesWon++;
     
-    if (invertedRound) colorWinner = BLACK;
-    else colorWinner = YELLOW;
+    if (invertedRound) colorWinner = YELLOW;
+    else colorWinner = BLACK;
   }
   
   // Update the scoreboard to reflect the end of this match.
