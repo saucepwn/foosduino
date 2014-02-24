@@ -4,6 +4,8 @@
 const int clockInterrupt = 0;  // For Arduino Uno, interrupt 0 is pin 2.
 const int timerOutputPin = 3;  // A PWM pin which will generate a square wave for our timer.
 const int displayResetPin = 4;
+const int yellowInsertLightPin = 5;
+const int blackInsertLightPin = 6;
 const int blackScorePin = 8;
 const int yellowScorePin = 9;
 const int ballInsertPin = 10;
@@ -45,7 +47,9 @@ void setup()
   pinMode(yellowScorePin, INPUT_PULLUP);
   pinMode(ballInsertPin, INPUT_PULLUP);
    
-  // Set up the LED pin to be an output:
+  // Set up the LED pins to be an output:
+  pinMode(yellowInsertLightPin, OUTPUT);
+  pinMode(blackInsertLightPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
   
   initGame();
@@ -77,6 +81,9 @@ void pollForBallInsert()
   {
     ballInPlay = 1;
     genieWriteStr(0, "Ball is in play");
+    digitalWrite(yellowInsertLightPin, LOW);
+    digitalWrite(blackInsertLightPin, LOW);
+    
     startClock(true);
   }
 }
@@ -86,43 +93,12 @@ void pollForBallInsert()
  */
 void pollForScore()
 {
-  int score;
-  
   if (digitalRead(blackScorePin) == LOW)
   {
-    stopClock(false);
-    ballInPlay = 0;
-    
-    score = ++playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchScore;
-    
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, score);
-    if (score != POINTS_PER_MATCH) genieWriteStr(0, "Black scores!");
+    registerScore(BLACK);
   }
   else if (digitalRead(yellowScorePin) == LOW)
   {
-    stopClock(false);
-    ballInPlay = 0;
-    
-    score = ++playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchScore;
-    
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, score);
-    if (score != POINTS_PER_MATCH) genieWriteStr(0, "Yellow scores!");
-  }
-  else
-  {
-    // Nobody has scored, return since the following code should only be ran if a player wins.
-    return;
-  }
-  
-  // Check to see if the match is over.
-  if (playerData[0].matchScore == POINTS_PER_MATCH || playerData[1].matchScore == POINTS_PER_MATCH)
-  {
-    genieWriteStr(0, "Round over!\nPlease switch sides.");
-    updateMatchScores();
-  }
-  else
-  {
-    // Index 0 means play sound, sound 0 is the goal score sound.
-    genieWriteObject(GENIE_OBJ_SOUND, 0, 0);
+    registerScore(YELLOW);
   }
 }

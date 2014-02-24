@@ -1,7 +1,57 @@
 /*
  * Holds game related functions.
  */
- 
+
+/**
+ * Call when a player scores a goal.
+ * @param color: Either YELLOW or BLACK.
+ */
+void registerScore(int color)
+{
+  stopClock(false);
+  ballInPlay = 0;
+  int score = ++playerData[ getArrayIndexForColor(invertedRound, color) ].matchScore;
+  
+  if (color == BLACK)
+  {
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, score);
+    
+    // Light up the ball insert pin for the team that was just scored on.
+    if (score != POINTS_PER_MATCH)
+    {
+      genieWriteStr(0, "Black scores!");
+      digitalWrite(yellowInsertLightPin, HIGH);
+    }
+  }
+  else if (color == YELLOW)
+  {
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, score);
+    
+    // Light up the ball insert pin for the team that was just scored on.
+    if (score != POINTS_PER_MATCH)
+    {
+      genieWriteStr(0, "Yellow scores!");
+      digitalWrite(yellowInsertLightPin, HIGH);
+    }
+  }
+  else
+  {
+    return;  // Invalid input.
+  }
+  
+  // Check to see if the match is over.
+  if (playerData[0].matchScore == POINTS_PER_MATCH || playerData[1].matchScore == POINTS_PER_MATCH)
+  {
+    genieWriteStr(0, "Round over!\nPlease switch sides.");
+    updateMatchScores();
+  }
+  else
+  {
+    // Index 0 means play sound, sound 0 is the goal score sound.
+    genieWriteObject(GENIE_OBJ_SOUND, 0, 0);
+  }
+}
+
 /**
  * Updates the match scoreboard at the bottom of the screen after a player wins a match. ONLY call this
  * when somebody wins the match.
@@ -52,10 +102,12 @@ void updateMatchScores()
   if (colorWinner == YELLOW)
   {
     genieWriteStr(0, "Ready.\nYellow, put in ball.");
+    digitalWrite(yellowInsertLightPin, HIGH);
   }
   else
   {
     genieWriteStr(0, "Ready.\nBlack, put in ball.");
+    digitalWrite(blackInsertLightPin, HIGH);
   }
   
   // Clear the scores.
