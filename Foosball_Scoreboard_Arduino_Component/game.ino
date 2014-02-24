@@ -31,7 +31,7 @@ void registerScore(int color)
     if (score != POINTS_PER_MATCH)
     {
       genieWriteStr(0, "Yellow scores!");
-      digitalWrite(yellowInsertLightPin, HIGH);
+      digitalWrite(blackInsertLightPin, HIGH);
     }
   }
   else
