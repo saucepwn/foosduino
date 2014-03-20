@@ -18,6 +18,9 @@ void initGame()
  */
 void initDisplay()
 {
+  // Wait for the screen to power up.
+  delay(1500);
+  
   genieBegin (GENIE_SERIAL, 115200);
   //genieAttachEventHandler(myEventHandler);
   
@@ -26,7 +29,7 @@ void initDisplay()
   digitalWrite(displayResetPin, 1);
   delay(100);
   digitalWrite(displayResetPin, 0);
-  delay(3000);
+  delay(2000);
   
   genieWriteObject(GENIE_OBJ_FORM, 0, 0);  // Select form 0 (the scoreboard).
   genieWriteObject(GENIE_OBJ_SOUND, 1, SOUND_VOLUME);
