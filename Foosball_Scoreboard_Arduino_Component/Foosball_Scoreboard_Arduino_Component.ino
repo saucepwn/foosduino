@@ -36,7 +36,8 @@ typedef struct
   int matchScore;
   int totalScore;
   int matchesWon;
-} player;
+} 
+player;
 
 player playerData[2];
 
@@ -46,28 +47,28 @@ void setup()
   pinMode(blackScorePin, INPUT_PULLUP);
   pinMode(yellowScorePin, INPUT_PULLUP);
   pinMode(ballInsertPin, INPUT_PULLUP);
-   
+
   // Set up the LED pins to be an output:
   pinMode(yellowInsertLightPin, OUTPUT);
   pinMode(blackInsertLightPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
-  
+
   initGame();
   initDisplay();
 }
- 
+
 void loop()
 {
   // Either poll for a score or a ball in play, depending on whether or not a ball is in play.
   if (ballInPlay == 0) pollForBallInsert();
   else pollForScore();
-  
+
   if (loopCycleCount == UPDATE_CLOCK_CYCLES)
   {
     if (updateClockFlag) updateClockDisplay();
     loopCycleCount = 0;
   }
-  
+
   loopCycleCount++;
 }
 
@@ -83,7 +84,7 @@ void pollForBallInsert()
     genieWriteStr(0, "Ball is in play");
     digitalWrite(yellowInsertLightPin, LOW);
     digitalWrite(blackInsertLightPin, LOW);
-    
+
     startClock(true);
   }
 }
@@ -102,3 +103,4 @@ void pollForScore()
     registerScore(YELLOW);
   }
 }
+
