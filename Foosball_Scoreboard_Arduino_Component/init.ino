@@ -22,6 +22,7 @@ void initDisplay()
   delay(1500);
   
   genieBegin (GENIE_SERIAL, 115200);
+  //genieWriteObject(GENIE_OBJ_SOUND, 1, SOUND_VOLUME);
   //genieAttachEventHandler(myEventHandler);
   
   // ResetSend a reset signal to the display then wait for it to come up.

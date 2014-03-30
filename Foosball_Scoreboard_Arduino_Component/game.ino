@@ -84,7 +84,7 @@ void updateMatchScores()
   playerData[1].totalScore += playerData[1].matchScore;
   
   // Play the match winning sound.
-  genieWriteObject(GENIE_OBJ_SOUND, 0, 1);
+  genieWriteObject(GENIE_OBJ_SOUND, 0, 2);
   delay(AFTER_ROUND_PAUSE_MSEC);
   
   // End the tournament if somebody won.
@@ -145,7 +145,7 @@ void endTournament()
   genieWriteStr(0, "Good game!");
   
   // Play the tournament win sound & show the stats form.
-  genieWriteObject(GENIE_OBJ_SOUND, 0, 2);
+  genieWriteObject(GENIE_OBJ_SOUND, 0, 3);
   
   // Populate & show the postgame stats form.
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 6, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].totalScore);

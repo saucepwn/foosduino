@@ -80,12 +80,33 @@ void pollForBallInsert()
 {
   if (digitalRead(ballInsertPin) == LOW)
   {
-    ballInPlay = 1;
-    genieWriteStr(0, "Ball is in play");
-    digitalWrite(yellowInsertLightPin, LOW);
-    digitalWrite(blackInsertLightPin, LOW);
-
-    startClock(true);
+    // Make sure a ball isn't stuck in the goal.
+    if (digitalRead(blackScorePin) == LOW || digitalRead(yellowScorePin) == LOW)
+    {
+      // Show the ball stuck warning.
+      genieWriteObject(GENIE_OBJ_FORM, 2, 0);
+      genieWriteObject(GENIE_OBJ_SOUND, 0, 1);
+      
+      // Trap execution here until the ball gets unstuck.
+      while (true)
+      {
+        if (digitalRead(blackScorePin) == HIGH && digitalRead(yellowScorePin) == HIGH)
+        {
+          genieWriteObject(GENIE_OBJ_FORM, 0, 0);
+          genieWriteStr(0, "Place ball in play.");
+          break;
+        }
+      }
+    }
+    else
+    {
+      ballInPlay = 1;
+      genieWriteStr(0, "Ball is in play");
+      digitalWrite(yellowInsertLightPin, LOW);
+      digitalWrite(blackInsertLightPin, LOW);
+  
+      startClock(true);
+    }
   }
 }
 

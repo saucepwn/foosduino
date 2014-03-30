@@ -1,6 +1,6 @@
 #platform "uLCD-43PT"
 
-// generated 2/19/2014 10:15:36 PM
+// generated 3/29/2014 8:01:55 PM
 
 #MODE RUNFLASH
 
@@ -116,14 +116,14 @@
     REPORT_OBJ      5
     REPORT_EVENT    7
 // End P1.inc
-    nObjects        31
+    nObjects        32
     nInputs         0
     ANITIMERS       0
 #END
 
 #DATA
-    word formstidx 0, 14
-    word formenidx 14, 31
+    word formstidx 0, 14, 31
+    word formenidx 14, 31, 32
     word IPControls 0
     word IPData 0
     word iStrings0  Strings0StartH, Strings0StartL, Strings0Size, 136, 4, 343, 67, WHITE, BLACK, 0, 1, 1, 0 
@@ -137,7 +137,7 @@
     word oAngularmeters 0
     word oCoolgauges 0
     word oCustomdigitss 0
-    word oForms 2, -1, -1
+    word oForms 3, -1, -1, -1
     word oGauges 0
     word oImages 0
     word oKeyboards 0
@@ -148,7 +148,7 @@
     word oThermometers 0
     word oUserleds 0
     word oVideos 0
-    word oStaticTexts 7, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6
+    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6, iStatictext7
     word oSpectrums 0
     word oScopes 0
     word oTanks 0
@@ -161,7 +161,7 @@
     word oTimers 0
     word oSoundss 1
     word oPinOutputs 0
-    word formBGcol 0x0000, 0x0000
+    word formBGcol 0x0000, 0x0000, 0x0000
     word kKeyboardKeystrokes -1
     word OPDataL 16, 1, 1, 125, 0,
                 355, 1, 1, 125, 0,
@@ -176,12 +176,13 @@
                 148, 2, 1, 43, 0,
                 244, 2, 1, 43, 0
     byte Sounds "smb_po!1.wav", 0,
-                "smb_wo!1.wav", 0,
-                "smb_st!1.wav", 0
+                "error_!1.wav", 0,
+                "smb_st!1.wav", 0,
+                "smb_wo!1.wav", 0
 #END
 
 var hFonts[1] ;
-var iSounds[3] ;
+var iSounds[4] ;
 var stringsCV[1] := [0], hstrings ;
 // Start P2.inc
 var oObjects[MaxTotObjects+1] ;                 // address of objects
@@ -431,7 +432,7 @@ func main()
     gfx_ScreenMode(LANDSCAPE) ;
 
     // open image control
-    hndl := file_LoadImageControl("FAMWO2~Z.dat", "FAMWO2~Z.gci", 1);
+    hndl := file_LoadImageControl("FOOSBA~2.dat", "FOOSBA~2.gci", 1);
 
     // init 'constants'
 // End P3.inc
@@ -472,12 +473,13 @@ func main()
     iSounds[0] := Sounds ;
     iSounds[1] := Sounds + 13 ;
     iSounds[2] := Sounds + 26 ;
-    hFonts[0] := file_LoadImageControl("FAMWO2~Z.da1", "FAMWO2~Z.gc1", 1)  ;
+    iSounds[3] := Sounds + 39 ;
+    hFonts[0] := file_LoadImageControl("FOOSBA~2.da1", "FOOSBA~2.gc1", 1)  ;
 // Start P4.inc
-    hstrings := file_Open("FAMWO2~Z.txf", 'r') ; // Open handle to access uSD strings, uncomment if required
+    hstrings := file_Open("FOOSBA~2.txf", 'r') ; // Open handle to access uSD strings, uncomment if required
     // init comms
-    com_Init(comRX,80,0);
-    setbaud(BAUD_115200);
+    com_Init(comRX,CMDLenMAX,0);
+    com_SetBaud(COM0,11520);
     com_TXbuffer(comTX, 100, 0);
     snd_BufSize(1) ;
     // tag 'real' objects

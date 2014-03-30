@@ -1,8 +1,8 @@
 ==============================================================
 ==============================================================
-4DGL Compiler 2.7.0.9 -- Copyright 2004-2012 4D Labs
-** Z:\Arduino Projects\Foosball Scoreboard\Foosball Scoreboard.4DWork\Foosball Scoreboard.4DGenieS
-compiled Wed Feb 19 22:15:41 2014
+4DGL Compiler 2.7.1.0 -- Copyright 2004-2012 4D Labs
+** C:\Users\gapadera\Documents\GitHub\foosduino\Foosball Scoreboard.4DWork\Foosball Scoreboard.4DGenieS
+compiled Sat Mar 29 19:02:01 2014
 
 ==============================================================
 ==============================================================
@@ -10,56 +10,56 @@ compiled Wed Feb 19 22:15:41 2014
 
 No Ref for file
 [LINKING]
-function 10, main, address 458
+function 10, main, address 481
 (main entry point)
 stack usage 112 + 4
 function 'main' requires no arguments
 function 'main' has no return value
 
 [LINKING]
-function 9, DoGFXObjects, address 1930
+function 9, DoGFXObjects, address 1967
 stack usage 0 + 4
 function 'DoGFXObjects' requires no arguments
 function 'DoGFXObjects' has no return value
 
 [LINKING]
-function 7, ActivateForm, address 2098
+function 7, ActivateForm, address 2135
 stack usage 6 + 4
 function 'ActivateForm' requires 1 argument
 function 'ActivateForm' has no return value
 
 [LINKING]
-function 6, ledDigitsDisplay, address 2450
+function 6, ledDigitsDisplay, address 2487
 stack usage 12 + 4
 function 'ledDigitsDisplay' requires 3 argument
 function 'ledDigitsDisplay' has no return value
 
 [LINKING]
-function 5, WriteObject, address 2764
+function 5, WriteObject, address 2801
 stack usage 6 + 4
 function 'WriteObject' requires 3 argument
 function 'WriteObject' has no return value
 
 [LINKING]
-function 4, ReadObject, address 3004
+function 4, ReadObject, address 3041
 stack usage 6 + 4
 function 'ReadObject' requires 2 argument
 function 'ReadObject' has no return value
 
 [LINKING]
-function 3, seroutOcs, address 3191
+function 3, seroutOcs, address 3228
 stack usage 0 + 4
 function 'seroutOcs' requires no arguments
 function 'seroutOcs' has no return value
 
 [LINKING]
-function 2, seroutCS, address 3206
+function 2, seroutCS, address 3243
 stack usage 0 + 4
 function 'seroutCS' requires 1 argument
 function 'seroutCS' has no return value
 
 [LINKING]
-function 1, PrintStrings, address 3224
+function 1, PrintStrings, address 3261
 stack usage 14 + 4
 function 'PrintStrings' requires 3 argument
 function 'PrintStrings' has no return value
@@ -130,10 +130,10 @@ __MAXMEM                          00003840      14400  (usage 1)
 __MAXPROG                         00003840      14400  (usage 1)
 ACK                               00000006          6  (usage 12)
 BACKGROUND_COLOUR                 00000011         17  (usage 3)
-BAUD_115200                       0000000D         13  (usage 3)
 BGIMAGE                           00000020         32  (usage 6)
 BLACK                             00000000          0  (usage 12)
-CMDLenMAX                         00000050         80  (usage 9)
+CMDLenMAX                         00000050         80  (usage 12)
+COM0                              0000F804      63492  (usage 3)
 I_ENABLED                         00008000      32768  (usage 6)
 I_STAYONTOP                       00000100        256  (usage 3)
 I_TOUCH_DISABLE                   00000020         32  (usage 6)
@@ -174,6 +174,7 @@ iStatictext3                      00000017         23  (usage 3)
 iStatictext4                      00000018         24  (usage 3)
 iStatictext5                      0000001B         27  (usage 3)
 iStatictext6                      0000001E         30  (usage 3)
+iStatictext7                      0000001F         31  (usage 3)
 iWidthDigit                       00000006          6  (usage 3)
 LANDSCAPE                         00000000          0  (usage 3)
 LPFINE                            0000AAAA      43690  (usage 9)
@@ -260,6 +261,7 @@ WRITE_STRU                        00000003          3  (usage 3)
 [PmmC FUNCTIONS]
 com_Count                         FFFFFF86        -122  args=0 r=1  (usage 3)
 com_Init                          FFFFFF88        -120  args=3 r=0  (usage 3)
+com_SetBaud                       FFFFFF72        -142  args=2 r=1  (usage 3)
 com_TXbuffer                      FFFFFF82        -126  args=3 r=0  (usage 3)
 file_GetC                         FFFFFF0E        -242  args=1 r=1  (usage 3)
 file_GetW                         FFFFFF0C        -244  args=1 r=1  (usage 3)
@@ -290,7 +292,6 @@ putch                             FFFFFFFE          -2  args=1 r=0  (usage 6)
 putstr                            FFFFFFF7          -9  args=1 r=1  (usage 6)
 serin                             FFFFFFFF          -1  args=0 r=1  (usage 3)
 serout                            FFFFFFFD          -3  args=1 r=0  (usage 42)
-setbaud                           FFFFFFFC          -4  args=1 r=0  (usage 3)
 snd_BufSize                       FFFFFEFE        -258  args=1 r=0  (usage 3)
 snd_Continue                      FFFFFEFB        -261  args=0 r=0  (usage 3)
 snd_Pause                         FFFFFEFC        -260  args=0 r=0  (usage 3)
@@ -309,66 +310,68 @@ uadd_3232                         FFFFFEDE        -290  args=3 r=1  (usage 3)
 umul_1616                         FFFFFEDF        -289  args=3 r=1  (usage 3)
 
 [USER FUNCTIONS]
-ActivateForm                      00000832  args=1 r=0  (usage 8)
-DoGFXObjects                      0000078A  args=0 r=0  (usage 6)
-ledDigitsDisplay                  00000992  args=3 r=0  (usage 6)
-PrintStrings                      00000C98  args=3 r=0  (usage 9)
-ReadObject                        00000BBC  args=2 r=0  (usage 3)
-seroutCS                          00000C86  args=1 r=0  (usage 25)
-seroutOcs                         00000C77  args=0 r=0  (usage 5)
-WriteObject                       00000ACC  args=3 r=0  (usage 18)
+ActivateForm                      00000857  args=1 r=0  (usage 8)
+DoGFXObjects                      000007AF  args=0 r=0  (usage 6)
+ledDigitsDisplay                  000009B7  args=3 r=0  (usage 6)
+PrintStrings                      00000CBD  args=3 r=0  (usage 9)
+ReadObject                        00000BE1  args=2 r=0  (usage 3)
+seroutCS                          00000CAB  args=1 r=0  (usage 25)
+seroutOcs                         00000C9C  args=0 r=0  (usage 5)
+WriteObject                       00000AF1  args=3 r=0  (usage 18)
 
 [GLOBAL VARIABLES]
-cmd                                   90  word[80]   (usage 78)
-comRX                                 50  word[40]   (usage 3)
-cs                                   170  word       (usage 42)
-curform                               43  word       (usage 45)
+cmd                                   91  word[80]   (usage 78)
+comRX                                 51  word[40]   (usage 3)
+cs                                   171  word       (usage 42)
+curform                               44  word       (usage 45)
 disk                                   1  word       (usage 6)
 hFonts                                 3  word[1]   (usage 6)
 hndl                                   2  word       (usage 84)
-hstrings                               8  word       (usage 12)
-input                                 48  word       (usage 8)
-inputtype                             46  word       (usage 13)
-iSounds                                4  word[3]   (usage 12)
-object                                49  word       (usage 6)
-Ocs                                  171  word       (usage 9)
-oObjects                               9  word[34]   (usage 108)
-stringsCV                              7  word[1]   (usage 23)
-TState                                47  word       (usage 14)
-x                                     44  word       (usage 12)
-y                                     45  word       (usage 9)
+hstrings                               9  word       (usage 12)
+input                                 49  word       (usage 8)
+inputtype                             47  word       (usage 13)
+iSounds                                4  word[4]   (usage 15)
+object                                50  word       (usage 6)
+Ocs                                  172  word       (usage 9)
+oObjects                              10  word[34]   (usage 108)
+stringsCV                              8  word[1]   (usage 23)
+TState                                48  word       (usage 14)
+x                                     45  word       (usage 12)
+y                                     46  word       (usage 9)
 
 [PRIVATE VARIABLES]
 
 [DATA]
-0007: 00 00 0E 00 0E 00 1F 00 00 00 00 00 00 00 00 00     ................
-0017: 1E 00 88 00 04 00 57 01 43 00 FF FF 00 00 00 00     ..à...W.C.ˇˇ....
-0027: 01 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00     ................
-0037: 00 00 00 00 00 00 00 00 00 00 02 00 FF FF FF FF     ............ˇˇˇˇ
-0047: 00 00 00 00 00 00 00 00 0C 00 00 00 02 00 04 00     ................
-0057: 06 00 09 00 0B 00 0F 00 11 00 13 00 15 00 19 00     ................
-0067: 1C 00 00 00 01 00 13 80 00 00 00 00 00 00 07 00     .......Ä........
-0077: 08 00 0D 00 0E 00 17 00 18 00 1B 00 1E 00 00 00     ................
-0087: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00     ................
-0097: 00 00 01 00 00 00 00 00 00 00 FF FF 10 00 01 00     ..........ˇˇ....
-00A7: 01 00 7D 00 00 00 63 01 01 00 01 00 7D 00 00 00     ..}...c.....}...
-00B7: 84 00 01 00 01 00 4F 00 00 00 10 01 01 00 01 00     Ñ.....O.........
-00C7: 4F 00 00 00 98 00 02 00 01 00 2B 00 00 00 F8 00     O...ò.....+...¯.
-00D7: 02 00 01 00 2B 00 00 00 08 00 02 00 01 00 40 00     ....+.........@.
-00E7: 00 00 60 01 02 00 01 00 40 00 00 00 0C 00 01 00     ..`.....@.......
-00F7: 01 00 4F 00 00 00 90 01 01 00 01 00 4F 00 00 00     ..O...ê.....O...
-0107: 94 00 02 00 01 00 2B 00 00 00 F4 00 02 00 01 00     î.....+...Ù.....
-0117: 2B 00 00 00 73 6D 62 5F 70 6F 21 31 2E 77 61 76     +...smb_po!1.wav
-0127: 00 73 6D 62 5F 77 6F 21 31 2E 77 61 76 00 73 6D     .smb_wo!1.wav.sm
-0137: 62 5F 73 74 21 31 2E 77 61 76 00 00 00 4D 6F 75     b_st!1.wav...Mou
-0147: 6E 74 69 6E 67 2E 2E 2E 0A 00 44 72 69 76 65 20     nting.....Drive 
-0157: 6E 6F 74 20 6D 6F 75 6E 74 65 64 2E 2E 2E 00 46     not mounted....F
-0167: 41 4D 57 4F 32 7E 5A 2E 64 61 74 00 46 41 4D 57     AMWO2~Z.dat.FAMW
-0177: 4F 32 7E 5A 2E 67 63 69 00 46 41 4D 57 4F 32 7E     O2~Z.gci.FAMWO2~
-0187: 5A 2E 64 61 31 00 46 41 4D 57 4F 32 7E 5A 2E 67     Z.da1.FAMWO2~Z.g
-0197: 63 31 00 46 41 4D 57 4F 32 7E 5A 2E 74 78 66 00     c1.FAMWO2~Z.txf.
-01A7: 89 07 89 07 89 07 89 07 89 07 89 07 89 07 89 07     â.â.â.â.â.â.â.â.
-01B7: 89 07 89 07 89 07 A8 07 31 08                       â.â.â.®.1.
+0007: 00 00 0E 00 1F 00 0E 00 1F 00 20 00 00 00 00 00     .......... .....
+0017: 00 00 00 00 1E 00 88 00 04 00 57 01 43 00 FF FF     ......à...W.C.ˇˇ
+0027: 00 00 00 00 01 00 01 00 00 00 00 00 00 00 00 00     ................
+0037: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03 00     ................
+0047: FF FF FF FF FF FF 00 00 00 00 00 00 00 00 0C 00     ˇˇˇˇˇˇ..........
+0057: 00 00 02 00 04 00 06 00 09 00 0B 00 0F 00 11 00     ................
+0067: 13 00 15 00 19 00 1C 00 00 00 01 00 17 80 00 00     .............Ä..
+0077: 00 00 00 00 08 00 08 00 0D 00 0E 00 17 00 18 00     ................
+0087: 1B 00 1E 00 1F 00 00 00 00 00 00 00 00 00 00 00     ................
+0097: 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00     ................
+00A7: 00 00 00 00 FF FF 10 00 01 00 01 00 7D 00 00 00     ....ˇˇ......}...
+00B7: 63 01 01 00 01 00 7D 00 00 00 84 00 01 00 01 00     c.....}...Ñ.....
+00C7: 4F 00 00 00 10 01 01 00 01 00 4F 00 00 00 98 00     O.........O...ò.
+00D7: 02 00 01 00 2B 00 00 00 F8 00 02 00 01 00 2B 00     ....+...¯.....+.
+00E7: 00 00 08 00 02 00 01 00 40 00 00 00 60 01 02 00     ........@...`...
+00F7: 01 00 40 00 00 00 0C 00 01 00 01 00 4F 00 00 00     ..@.........O...
+0107: 90 01 01 00 01 00 4F 00 00 00 94 00 02 00 01 00     ê.....O...î.....
+0117: 2B 00 00 00 F4 00 02 00 01 00 2B 00 00 00 73 6D     +...Ù.....+...sm
+0127: 62 5F 70 6F 21 31 2E 77 61 76 00 65 72 72 6F 72     b_po!1.wav.error
+0137: 5F 21 31 2E 77 61 76 00 73 6D 62 5F 73 74 21 31     _!1.wav.smb_st!1
+0147: 2E 77 61 76 00 73 6D 62 5F 77 6F 21 31 2E 77 61     .wav.smb_wo!1.wa
+0157: 76 00 00 00 4D 6F 75 6E 74 69 6E 67 2E 2E 2E 0A     v...Mounting....
+0167: 00 44 72 69 76 65 20 6E 6F 74 20 6D 6F 75 6E 74     .Drive not mount
+0177: 65 64 2E 2E 2E 00 46 4F 4F 53 42 41 7E 32 2E 64     ed....FOOSBA~2.d
+0187: 61 74 00 46 4F 4F 53 42 41 7E 32 2E 67 63 69 00     at.FOOSBA~2.gci.
+0197: 46 4F 4F 53 42 41 7E 32 2E 64 61 31 00 46 4F 4F     FOOSBA~2.da1.FOO
+01A7: 53 42 41 7E 32 2E 67 63 31 00 46 4F 4F 53 42 41     SBA~2.gc1.FOOSBA
+01B7: 7E 32 2E 74 78 66 00 AE 07 AE 07 AE 07 AE 07 AE     ~2.txf.Æ.Æ.Æ.Æ.Æ
+01C7: 07 AE 07 AE 07 AE 07 AE 07 AE 07 AE 07 CD 07 56     .Æ.Æ.Æ.Æ.Æ.Æ.Õ.V
+01D7: 08                                                  .
 
 [__MAXPROG]
 14400
@@ -378,9 +381,9 @@ y                                     45  word       (usage 9)
 [PROGRAM]
 main
 [CODESIZE]
-3698
+3735
 [MEMSIZE]
-171
+172
 [ARGCOUNT]
 0
 [RETURNS]
@@ -393,10 +396,10 @@ NO
 128
 
 [PROJECT]
-Z:\Arduino Projects\Foosball Scoreboard\Foosball Scoreboard.4DWork\Foosball Scoreboard.4DGenieS
+C:\Users\gapadera\Documents\GitHub\foosduino\Foosball Scoreboard.4DWork\Foosball Scoreboard.4DGenieS
 C:\Program Files (x86)\4D Labs\4D Workshop 4 IDE\include\uLCD-43PT.fnc
 C:\Program Files (x86)\4D Labs\4D Workshop 4 IDE\include\PicasoFunctions.fnc
 C:\Program Files (x86)\4D Labs\4D Workshop 4 IDE\include\4DGL_16bitColours.fnc
 C:\Program Files (x86)\4D Labs\4D Workshop 4 IDE\include\VisualConst.inc
-Z:\Arduino Projects\Foosball Scoreboard\Foosball Scoreboard.4DWork\Foosball ScoreboardConst.inc
+C:\Users\gapadera\Documents\GitHub\foosduino\Foosball Scoreboard.4DWork\Foosball ScoreboardConst.inc
 C:\Program Files (x86)\4D Labs\4D Workshop 4 IDE\include\CLPrintStrings.inc

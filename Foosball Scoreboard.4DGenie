@@ -202,7 +202,7 @@ StaticText
 end
 Sounds
     Name                         Sounds0
-    WavFiles                     smb_po!1.wav\nsmb_wo!1.wav\nsmb_st!1.wav
+    WavFiles                     smb_po!1.wav\nerror_!1.wav\nsmb_st!1.wav\nsmb_wo!1.wav
     OnPlayingChanged             ''
     OnVolumeChanged              ''
 end
@@ -461,4 +461,38 @@ Rectangle
     Pattern                      Fine
     Top                          134
     Width                        129
+end
+Form
+    Name                         Form2
+    Bgtype                       Color
+    Color                        BLACK
+    Image                        (None)
+    Source.Height                0
+    Source.Left                  0
+    Source.Top                   0
+    Source.Width                 0
+    OnActivate                   ''
+    OnCreate                     ''
+    OnRepeat                     ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+StaticText
+    Name                         Statictext7
+    AutoSize                     Yes
+    Caption                      'Ball stuck in goal. Please remove ball.'
+    Color                        BLACK
+    Font.Color                   0x0700F5
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    40
+    Font.Style                   [Bold]
+    Height                       192
+    Left                         0
+    Top                          28
+    Transparent                  Yes
+    Visible                      Yes
+    Width                        480
+    WordWrap                     Yes
 end
