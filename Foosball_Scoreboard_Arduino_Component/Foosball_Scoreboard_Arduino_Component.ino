@@ -11,6 +11,12 @@ const int yellowScorePin = 9;
 const int ballInsertPin = 10;
 const int ledPin =  13;
 
+/* Ball insert (beam break sensors) variables */
+const int ballInsert1 = A5;
+const int ballInsert2 = A4;
+const int ballInsertThreshold = 250;
+boolean insertInProgress = false;
+
 /* Game status variables. */
 int ballInPlay = 0;
 boolean invertedRound = false;               // Set to false when player 0 is yellow. Set to true when player 0 is black.
@@ -52,6 +58,10 @@ void setup()
   pinMode(yellowInsertLightPin, OUTPUT);
   pinMode(blackInsertLightPin, OUTPUT);
   pinMode(ledPin, OUTPUT);
+  
+  // Set up ball insert pins (beam break sensors)
+  pinMode(ballInsert1, INPUT);
+  pinMode(ballInsert2, INPUT);
 
   initGame();
   initDisplay();
@@ -78,8 +88,19 @@ void loop()
  */
 void pollForBallInsert()
 {
-  if (digitalRead(ballInsertPin) == LOW)
+  int ballInsert1Value = analogRead(ballInsert1);
+  int ballInsert2Value = analogRead(ballInsert2);
+  
+  if (false == insertInProgress && (ballInsert1Value > ballInsertThreshold || ballInsert2Value > ballInsertThreshold))
   {
+    // Detect when the beam has been broken for either ball insert sensor.
+    insertInProgress = true;
+  }
+  
+  if (digitalRead(ballInsertPin) == LOW || (insertInProgress && ballInsert1Value < ballInsertThreshold && ballInsert2Value < ballInsertThreshold))
+  {
+    insertInProgress = false;
+    
     // Make sure a ball isn't stuck in the goal.
     if (digitalRead(blackScorePin) == LOW || digitalRead(yellowScorePin) == LOW)
     {
