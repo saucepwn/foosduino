@@ -250,8 +250,8 @@ LedDigits
     Left                         8
     OutlineColor                 BLACK
     Palette.High                 YELLOW
-    Palette.Low                  0x003432
-    Top                          56
+    Palette.Low                  0x001A1A
+    Top                          10
     Visible                      Yes
     Width                        128
     OnChanged                    ''
@@ -269,8 +269,8 @@ LedDigits
     Left                         352
     OutlineColor                 BLACK
     Palette.High                 WHITE
-    Palette.Low                  0x212121
-    Top                          56
+    Palette.Low                  0x0D0D0D
+    Top                          10
     Visible                      Yes
     Width                        128
     OnChanged                    ''
@@ -289,7 +289,7 @@ LedDigits
     OutlineColor                 BLACK
     Palette.High                 clLime
     Palette.Low                  0x001400
-    Top                          168
+    Top                          120
     Visible                      Yes
     Width                        79
     OnChanged                    ''
@@ -308,7 +308,7 @@ LedDigits
     OutlineColor                 BLACK
     Palette.High                 clLime
     Palette.Low                  0x001400
-    Top                          168
+    Top                          120
     Visible                      Yes
     Width                        79
     OnChanged                    ''
@@ -346,36 +346,6 @@ StaticText
     Width                        92
     WordWrap                     Yes
 end
-Rectangle
-    Name                         Rectangle1
-    Color                        WHITE
-    Filled                       Yes
-    Height                       5
-    Left                         112
-    Outlined                     Yes
-    OutlineColor                 WHITE
-    Pattern                      Fine
-    Top                          259
-    Width                        254
-end
-StaticText
-    Name                         Statictext4
-    AutoSize                     Yes
-    Caption                      'Matches won'
-    Color                        BLACK
-    Font.Color                   WHITE
-    Font.Effects                 []
-    Font.Name                    Tahoma
-    Font.Size                    12
-    Font.Style                   []
-    Height                       19
-    Left                         192
-    Top                          236
-    Transparent                  Yes
-    Visible                      Yes
-    Width                        91
-    WordWrap                     Yes
-end
 LedDigits
     Name                         Leddigits10
     Color                        BLACK
@@ -387,7 +357,7 @@ LedDigits
     OutlineColor                 BLACK
     Palette.High                 RED
     Palette.Low                  0x000531
-    Top                          148
+    Top                          138
     Visible                      Yes
     Width                        86
     OnChanged                    ''
@@ -407,7 +377,7 @@ StaticText
     Font.Style                   []
     Height                       37
     Left                         228
-    Top                          156
+    Top                          146
     Transparent                  Yes
     Visible                      Yes
     Width                        18
@@ -424,7 +394,7 @@ LedDigits
     OutlineColor                 BLACK
     Palette.High                 RED
     Palette.Low                  0x000531
-    Top                          148
+    Top                          138
     Visible                      Yes
     Width                        86
     OnChanged                    ''
@@ -444,7 +414,7 @@ StaticText
     Font.Style                   []
     Height                       21
     Left                         188
-    Top                          112
+    Top                          102
     Transparent                  Yes
     Visible                      Yes
     Width                        110
@@ -459,8 +429,104 @@ Rectangle
     Outlined                     Yes
     OutlineColor                 WHITE
     Pattern                      Fine
-    Top                          134
+    Top                          124
     Width                        129
+end
+WinButton
+    Name                         Winbutton0
+    Appearance.Alignment         Center
+    Appearance.Layout            Left
+    Appearance.PictureAlignment  Right
+    Appearance.SimpleLayout      No
+    Appearance.Spacing           3
+    AutoSizeToPicture            No
+    Bevel                        Yes
+    BevelColor                   clWhite
+    Caption                      'Play Again'
+    Color                        clGray
+    Font.Color                   clWindowText
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    16
+    Font.Style                   []
+    Height                       72
+    Left                         96
+    Matrix                       -1
+    Momentary                    Yes
+    Picture                      (None)
+    StatusWhenOff.BGcolor        RED
+    StatusWhenOff.Caption        ''
+    StatusWhenOff.Glow           Yes
+    StatusWhenOff.Color          WHITE
+    StatusWhenOff.Effects        []
+    StatusWhenOff.Name           Tahoma
+    StatusWhenOff.Size           8
+    StatusWhenOff.Style          []
+    StatusWhenOff.Visible        Yes
+    StatusWhenOn.BGcolor         RED
+    StatusWhenOn.Caption         ''
+    StatusWhenOn.Glow            Yes
+    StatusWhenOn.Color           WHITE
+    StatusWhenOn.Effects         []
+    StatusWhenOn.Name            Tahoma
+    StatusWhenOn.Size            8
+    StatusWhenOn.Style           []
+    StatusWhenOn.Visible         Yes
+    Top                          200
+    Visible                      Yes
+    Width                        132
+    OnChanged                    'Report Message'
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
+end
+WinButton
+    Name                         Winbutton1
+    Appearance.Alignment         Center
+    Appearance.Layout            Left
+    Appearance.PictureAlignment  Right
+    Appearance.SimpleLayout      No
+    Appearance.Spacing           3
+    AutoSizeToPicture            No
+    Bevel                        Yes
+    BevelColor                   clWhite
+    Caption                      'Main Menu'
+    Color                        clGray
+    Font.Color                   clWindowText
+    Font.Effects                 []
+    Font.Name                    Tahoma
+    Font.Size                    16
+    Font.Style                   []
+    Height                       72
+    Left                         244
+    Matrix                       -1
+    Momentary                    Yes
+    Picture                      (None)
+    StatusWhenOff.BGcolor        RED
+    StatusWhenOff.Caption        ''
+    StatusWhenOff.Glow           Yes
+    StatusWhenOff.Color          WHITE
+    StatusWhenOff.Effects        []
+    StatusWhenOff.Name           Tahoma
+    StatusWhenOff.Size           8
+    StatusWhenOff.Style          []
+    StatusWhenOff.Visible        Yes
+    StatusWhenOn.BGcolor         RED
+    StatusWhenOn.Caption         ''
+    StatusWhenOn.Glow            Yes
+    StatusWhenOn.Color           WHITE
+    StatusWhenOn.Effects         []
+    StatusWhenOn.Name            Tahoma
+    StatusWhenOn.Size            8
+    StatusWhenOn.Style           []
+    StatusWhenOn.Visible         Yes
+    Top                          200
+    Visible                      Yes
+    Width                        132
+    OnChanged                    ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
 end
 Form
     Name                         Form2
@@ -495,4 +561,20 @@ StaticText
     Visible                      Yes
     Width                        480
     WordWrap                     Yes
+end
+Form
+    Name                         Form3
+    Bgtype                       Color
+    Color                        BLACK
+    Image                        (None)
+    Source.Height                0
+    Source.Left                  0
+    Source.Top                   0
+    Source.Width                 0
+    OnActivate                   ''
+    OnCreate                     ''
+    OnRepeat                     ''
+    OnTouchMoving                ''
+    OnTouchPressed               ''
+    OnTouchReleased              ''
 end

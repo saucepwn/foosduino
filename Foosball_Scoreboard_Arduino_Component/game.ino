@@ -14,7 +14,7 @@ void registerScore(int color)
   
   if (color == BLACK)
   {
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, score);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_SCORE_DIGIT_IDX, score);
     
     // Light up the ball insert pin for the team that was just scored on.
     if (score != POINTS_PER_MATCH)
@@ -25,7 +25,7 @@ void registerScore(int color)
   }
   else if (color == YELLOW)
   {
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, score);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_SCORE_DIGIT_IDX, score);
     
     // Light up the ball insert pin for the team that was just scored on.
     if (score != POINTS_PER_MATCH)
@@ -77,8 +77,8 @@ void updateMatchScores()
   }
   
   // Update the scoreboard to reflect the end of this match.
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_ROUND_DIGIT_IDX, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_ROUND_DIGIT_IDX, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
   
   playerData[0].totalScore += playerData[0].matchScore;
   playerData[1].totalScore += playerData[1].matchScore;
@@ -95,8 +95,8 @@ void updateMatchScores()
   }
   
   // Show a swapped match score for when the players switch sides.
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_ROUND_DIGIT_IDX, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_ROUND_DIGIT_IDX, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
   
   // Tell the player who should put the ball in.
   if (colorWinner == YELLOW)

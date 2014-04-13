@@ -1,6 +1,6 @@
 #platform "uLCD-43PT"
 
-// generated 3/29/2014 8:01:55 PM
+// generated 4/12/2014 10:21:36 PM
 
 #MODE RUNFLASH
 
@@ -116,16 +116,18 @@
     REPORT_OBJ      5
     REPORT_EVENT    7
 // End P1.inc
-    nObjects        32
-    nInputs         0
+    nObjects        33
+    nInputs         3
     ANITIMERS       0
 #END
 
 #DATA
-    word formstidx 0, 14, 31
-    word formenidx 14, 31, 32
-    word IPControls 0
-    word IPData 0
+    word formstidx 0, 14, 32, 33
+    word formenidx 14, 32, 33, 33
+    word IPControls -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 44
+    word IPData tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 22, 2,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 0, 4
     word iStrings0  Strings0StartH, Strings0StartL, Strings0Size, 136, 4, 343, 67, WHITE, BLACK, 0, 1, 1, 0 
     word oDipSwitchs 0
     word oKnobs 0
@@ -133,11 +135,11 @@
     word oRotarySwitchs 0
     word oGSliders 0
     word oTrackbars 0
-    word oWinButtons 0
+    word oWinButtons 2, iWinbutton0, iWinbutton1
     word oAngularmeters 0
     word oCoolgauges 0
     word oCustomdigitss 0
-    word oForms 3, -1, -1, -1
+    word oForms 4, -1, -1, -1, -1
     word oGauges 0
     word oImages 0
     word oKeyboards 0
@@ -148,7 +150,7 @@
     word oThermometers 0
     word oUserleds 0
     word oVideos 0
-    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6, iStatictext7
+    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, -1, iStatictext5, iStatictext6, iStatictext7
     word oSpectrums 0
     word oScopes 0
     word oTanks 0
@@ -161,7 +163,7 @@
     word oTimers 0
     word oSoundss 1
     word oPinOutputs 0
-    word formBGcol 0x0000, 0x0000, 0x0000
+    word formBGcol 0x0000, 0x0000, 0x0000, 0x0000
     word kKeyboardKeystrokes -1
     word OPDataL 16, 1, 1, 125, 0,
                 355, 1, 1, 125, 0,
@@ -222,6 +224,7 @@ func ReadObject(var ObjectType, var ObjectIdx)
         k := snd_Playing();             // only a code of 0 is valid, return playing block regardless
         else
         k := img_GetWord(hndl, *j, IMAGE_INDEX);
+        if (((ObjectType == tWinButton) || (ObjectType == tAniButton) || (ObjectType == tUserButton) || (ObjectType == t4Dbutton)) && (k)) k := 1 ;
     endif
     seroutCS(k >> 8) ; // first 8 bits
     seroutCS(k) ;
@@ -237,6 +240,16 @@ func WriteObject(var ObjectType, var ObjectIdx, var NewVal)
     else
         Objects := *(oObjects+ObjectType)+ObjectIdx*2+2 ;
         i := *(Objects) ;
+        switch (ObjectType)
+            case tWinButton :
+                j := IPControls[oWinButtons[ObjectIdx+1]] ;
+                break ;
+            default : j := -1 ;
+        endswitch
+        if (j != -1) 
+            if (*(j+IPData+IPD_P2) != -1) TurnOffButtons(*(j+IPData+IPD_P2)) ;
+            NewVal := NewVal << 1 ;
+        endif
          if (ObjectType == tLeddigits)
             img_SetWord(hndl, i , IMAGE_TAG2, NewVal); // where state is 0 to 2
             ledDigitsDisplay(i, oLeddigitss, OPDataL) ;
@@ -261,6 +274,20 @@ func WriteObject(var ObjectType, var ObjectIdx, var NewVal)
     endif
 endfunc
 
+func TurnOffButtons(var group)
+    var j, k, l;
+    for (j := 0; j < nInputs; j++)
+        k := j*IPDatasize ;
+        if (*(IPData+k+IPD_P2) == group)
+            l := -1 ;
+             if (*(IPData+k) == tWinButton)
+                l := oWinButtons[*(IPData+k+IPD_OBJVidx)/2] ;
+                img_SetWord(hndl, l, IMAGE_INDEX, 0);
+                img_Show(hndl, l);      // only shows on current form
+            endif
+        endif
+    next
+endfunc
 
 
 // WARNING, this code will crash if newval exceeds maximum displayable number
@@ -348,6 +375,7 @@ func UpdateObjects(var newval)
 
         img_SetWord(hndl, *(object), IMAGE_INDEX, newval);
             img_Show(hndl, *(object));      // only shows on current form
+        if (((inputtype == t4Dbutton) || (inputtype == tUserButton) || (inputtype == tWinButton) || (inputtype == tAniButton) )&& (newval > 1)) newval := 1;
         IPidx := *(input+TState) ;
         while(IPidx != 0)
             otherOBJ := IPidx + IPData;
@@ -402,11 +430,7 @@ func DoGFXObjects()
             gfx_OutlineColour(BLACK) ;
             gfx_OutlineColour(WHITE) ;
             gfx_LinePattern(LPFINE) ;
-            gfx_RectangleFilled(112, 259, 365, 263, WHITE) ;
-            gfx_OutlineColour(BLACK) ;
-            gfx_OutlineColour(WHITE) ;
-            gfx_LinePattern(LPFINE) ;
-            gfx_RectangleFilled(175, 134, 303, 139, WHITE) ;
+            gfx_RectangleFilled(175, 124, 303, 129, WHITE) ;
             gfx_OutlineColour(BLACK) ;
         break ;
     endswitch
@@ -648,7 +672,32 @@ cTrackbar:
 c4DButton:
 cUserButton:
 cWinbutton:
+    object := oWinButtons + *(input+IPD_OBJVidx) ;
 gbutton:
+    if (*(input+IPD_P1))                                 // momentary, reports 0, but should report 1
+        if (state == TOUCH_RELEASED)
+            i := 0 ;
+            TState == IPD_DOWN ;
+        else
+            i := 1 ;
+            TState == IPD_RELEASE ;
+        endif
+    else if (*(input+IPD_P2) == -1)                      // Toggle, reports 0+2, but should report 0+1
+        i := img_GetWord(hndl, *(object), IMAGE_INDEX) ; // current state
+        if (state == TOUCH_RELEASED)                     // only truly change on release
+            i := ++i & 3 ;
+        else
+            i |= 1 ;                                      // make down regardless of current state
+        endif
+    else                        // group action, up all other buttons on touch press, reports 0 for button down
+        if (state == TOUCH_PRESSED)                     // only truly change on release
+            TurnOffButtons(*(input+IPD_P2)) ;
+        endif
+    i := 2 ;
+    endif
+
+    UpdateObjects(i) ;
+endsub ;
 
 cAniButton:
 

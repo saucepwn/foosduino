@@ -30,8 +30,16 @@ volatile boolean updateClockFlag = false;
 /* Game config variables. */
 const int POINTS_PER_MATCH = 5;
 const int TOURNAMENT_WIN_LIMIT = 3;          // How many games a player has to win before winning the tournament.
-const int AFTER_ROUND_PAUSE_MSEC = 9000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
+const int AFTER_ROUND_PAUSE_MSEC = 7000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
 const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
+
+/* LCD config variables. */
+const int YELLOW_SCORE_DIGIT_IDX = 0;
+const int BLACK_SCORE_DIGIT_IDX = 1;
+const int YELLOW_ROUND_DIGIT_IDX = 2;
+const int BLACK_ROUND_DIGIT_IDX = 3;
+const int CLOCK_MINUTES_IDX = 4;
+const int CLOCK_SECONDS_IDX = 5;
 
 /* Enums */
 const int YELLOW = 0;
@@ -73,6 +81,9 @@ void loop()
   if (ballInPlay == 0) pollForBallInsert();
   else pollForScore();
 
+  // Receive touch events from LCD panel.
+  genieDoEvents();
+  
   if (loopCycleCount == UPDATE_CLOCK_CYCLES)
   {
     if (updateClockFlag) updateClockDisplay();

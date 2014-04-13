@@ -55,10 +55,10 @@ void updateClockDisplay()
   if (displayedMinutes != clockMinutes)
   {
     displayedMinutes = clockMinutes;
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 4, displayedMinutes);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_MINUTES_IDX, displayedMinutes);
   }
   
-  genieWriteObject(GENIE_OBJ_LED_DIGITS, 5, clockSeconds);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_SECONDS_IDX, clockSeconds);
   updateClockFlag = false;
 }
 
