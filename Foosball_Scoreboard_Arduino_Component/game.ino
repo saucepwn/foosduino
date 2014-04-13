@@ -127,10 +127,6 @@ void updateMatchScores()
  */
 int getArrayIndexForColor(boolean inverted, int color)
 {
-  // For non-side-switching.
-  if (color == BLACK) return 1;
-  else return 0;
-  /*
   if ((inverted && color == YELLOW) || (!inverted && color == BLACK))
   {
     return 1;
@@ -138,7 +134,7 @@ int getArrayIndexForColor(boolean inverted, int color)
   else
   {
     return 0;
-  }*/
+  }
 }
 
 /*
