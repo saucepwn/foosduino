@@ -31,3 +31,8 @@
 "Winbutton0" 7200 001D 60 C8
 "Winbutton1" 0800 001E F4 C8
 "Statictext7" 9E00 001E 00 1C
+"Winbutton2" 6400 0021 05 28
+"Winbutton3" C800 0023 F5 28
+"Winbutton4" 2C00 0026 05 D7
+"Winbutton5" E800 0026 F5 D7
+"Statictext4" A400 0027 90 04

@@ -1,4 +1,4 @@
-// File generated 4/12/2014 10:21:32 PM
+// File generated 5/26/2014 6:51:42 PM
 // Warning! This is a generated file, any manual changes will be
 // lost during the next generation.
 
@@ -39,6 +39,11 @@
     iWinbutton0     // offset 0x1D7200
     iWinbutton1     // offset 0x1E0800
     iStatictext7    // offset 0x1E9E00
+    iWinbutton2     // offset 0x216400
+    iWinbutton3     // offset 0x23C800
+    iWinbutton4     // offset 0x262C00
+    iWinbutton5     // offset 0x26E800
+    iStatictext4    // offset 0x27A400
 #END
 
 #constant  Strings0StartH   0x0

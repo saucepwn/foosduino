@@ -1,6 +1,6 @@
 #platform "uLCD-43PT"
 
-// generated 4/12/2014 10:21:36 PM
+// generated 5/26/2014 6:51:46 PM
 
 #MODE RUNFLASH
 
@@ -116,18 +116,27 @@
     REPORT_OBJ      5
     REPORT_EVENT    7
 // End P1.inc
-    nObjects        33
-    nInputs         3
+    nObjects        38
+    nInputs         12
     ANITIMERS       0
 #END
 
 #DATA
     word formstidx 0, 14, 32, 33
-    word formenidx 14, 32, 33, 33
-    word IPControls -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 44
+    word formenidx 14, 32, 33, 38
+    word IPControls -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 44, -1, 88, 132, 176, 220
     word IPData tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 22, 2,
                 OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 0, 4
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 66, 4,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 110, 6,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 154, 8,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 198, 10,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 242, 12,
+                OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5
     word iStrings0  Strings0StartH, Strings0StartL, Strings0Size, 136, 4, 343, 67, WHITE, BLACK, 0, 1, 1, 0 
     word oDipSwitchs 0
     word oKnobs 0
@@ -135,7 +144,7 @@
     word oRotarySwitchs 0
     word oGSliders 0
     word oTrackbars 0
-    word oWinButtons 2, iWinbutton0, iWinbutton1
+    word oWinButtons 6, iWinbutton0, iWinbutton1, iWinbutton2, iWinbutton3, iWinbutton4, iWinbutton5
     word oAngularmeters 0
     word oCoolgauges 0
     word oCustomdigitss 0
@@ -150,7 +159,7 @@
     word oThermometers 0
     word oUserleds 0
     word oVideos 0
-    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, -1, iStatictext5, iStatictext6, iStatictext7
+    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6, iStatictext7
     word oSpectrums 0
     word oScopes 0
     word oTanks 0

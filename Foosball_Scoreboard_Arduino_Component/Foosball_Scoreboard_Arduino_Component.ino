@@ -41,6 +41,7 @@ const int BLACK_ROUND_DIGIT_IDX = 3;
 const int CLOCK_MINUTES_IDX = 4;
 const int CLOCK_SECONDS_IDX = 5;
 const int BTN_PLAY_AGAIN_IDX = 0;
+const int BTN_MAIN_MENU_IDX = 1;
 const int BTN_QUICK_MATCH_IDX = 2;
 const int BTN_QUICK_TOURNAMENT_IDX = 3;
 const int BTN_CUSTOM_MATCH_IDX = 4;

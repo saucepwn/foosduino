@@ -9,6 +9,7 @@ void initGame()
 {
   invertedRound = false;
   totalGameSeconds = 0;
+  insertInProgress = false;
   playerData[0] = (player) {0, 0, 0};
   playerData[1] = (player) {0, 0, 0};
 }
@@ -26,12 +27,14 @@ void initDisplay()
   digitalWrite(displayResetPin, 1);
   delay(100);
   digitalWrite(displayResetPin, 0);
+
+  delay(1500);  
+  genieBegin(GENIE_SERIAL, 115200);
   delay(1500);
   
-  genieBegin(GENIE_SERIAL, 115200);
   genieAttachEventHandler(myEventHandler);
   
-  genieWriteObject(GENIE_OBJ_FORM, 0, 3);  // Select form 0 (the scoreboard).
+  genieWriteObject(GENIE_OBJ_FORM, 3, 0);  // Select form 3 (the main menu).
   genieWriteObject(GENIE_OBJ_SOUND, 1, SOUND_VOLUME);
 }
 
@@ -67,6 +70,13 @@ void myEventHandler()
         // Reset the game variables.
         initGame();
         resetScoreboard();
+      }
+      
+      // The "main menu" button was pressed.
+      if (event.reportObject.index == BTN_MAIN_MENU_IDX)
+      {
+        // Go to the main menu screen.
+        genieWriteObject(GENIE_OBJ_FORM, 3, 0);  // Select form 3 (the main menu).
       }
       
       // The "quick match" button was pressed.

@@ -61,7 +61,7 @@ LedDigits
     Top                          4
     Visible                      Yes
     Width                        125
-    OnChanged                    ''
+    OnChanged                    Gauge1Set
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
@@ -523,7 +523,7 @@ WinButton
     Top                          200
     Visible                      Yes
     Width                        132
-    OnChanged                    ''
+    OnChanged                    'Report Message'
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
@@ -621,7 +621,7 @@ WinButton
     Top                          40
     Visible                      Yes
     Width                        230
-    OnChanged                    ''
+    OnChanged                    'Report Message'
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
@@ -669,7 +669,7 @@ WinButton
     Top                          40
     Visible                      Yes
     Width                        230
-    OnChanged                    ''
+    OnChanged                    'Report Message'
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
@@ -717,7 +717,7 @@ WinButton
     Top                          215
     Visible                      Yes
     Width                        230
-    OnChanged                    ''
+    OnChanged                    'Report Message'
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
@@ -765,7 +765,7 @@ WinButton
     Top                          215
     Visible                      Yes
     Width                        230
-    OnChanged                    ''
+    OnChanged                    'Report Message'
     OnTouchMoving                ''
     OnTouchPressed               ''
     OnTouchReleased              ''
