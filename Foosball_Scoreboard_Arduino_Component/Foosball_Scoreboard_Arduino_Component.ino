@@ -28,8 +28,8 @@ long loopCycleCount = 0;
 volatile boolean updateClockFlag = false;
 
 /* Game config variables. */
-const int POINTS_PER_MATCH = 5;
-const int TOURNAMENT_WIN_LIMIT = 3;          // How many games a player has to win before winning the tournament.
+int POINTS_PER_MATCH = 5;
+int TOURNAMENT_WIN_LIMIT = 3;          // How many games a player has to win before winning the tournament.
 const int AFTER_ROUND_PAUSE_MSEC = 7000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
 const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
 
@@ -40,6 +40,11 @@ const int YELLOW_ROUND_DIGIT_IDX = 2;
 const int BLACK_ROUND_DIGIT_IDX = 3;
 const int CLOCK_MINUTES_IDX = 4;
 const int CLOCK_SECONDS_IDX = 5;
+const int BTN_PLAY_AGAIN_IDX = 0;
+const int BTN_QUICK_MATCH_IDX = 2;
+const int BTN_QUICK_TOURNAMENT_IDX = 3;
+const int BTN_CUSTOM_MATCH_IDX = 4;
+const int BTN_CUSTOM_TOURNAMENT_IDX = 5;
 
 /* Enums */
 const int YELLOW = 0;

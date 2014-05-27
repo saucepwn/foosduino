@@ -31,9 +31,23 @@ void initDisplay()
   genieBegin(GENIE_SERIAL, 115200);
   genieAttachEventHandler(myEventHandler);
   
-  genieWriteObject(GENIE_OBJ_FORM, 0, 0);  // Select form 0 (the scoreboard).
+  genieWriteObject(GENIE_OBJ_FORM, 0, 3);  // Select form 0 (the scoreboard).
   genieWriteObject(GENIE_OBJ_SOUND, 1, SOUND_VOLUME);
+}
+
+/**
+ * Resets all digits on the scoreboard form to 0 and then displays the scoreboard form.
+ */
+void resetScoreboard()
+{
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_SCORE_DIGIT_IDX, 0);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_SCORE_DIGIT_IDX, 0);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_ROUND_DIGIT_IDX, 0);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_ROUND_DIGIT_IDX, 0);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_MINUTES_IDX, 0);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_SECONDS_IDX, 0);
   
+  genieWriteObject(GENIE_OBJ_FORM, 0, 0);  // Select form 0 (the scoreboard).
   genieWriteStr(0, "Ready");
 }
 
@@ -48,21 +62,35 @@ void myEventHandler()
     if (event.reportObject.object == GENIE_OBJ_WINBUTTON)
     {
       // The "play again" button was pressed.
-      if (event.reportObject.index == 0)
+      if (event.reportObject.index == BTN_PLAY_AGAIN_IDX)
       {
         // Reset the game variables.
         initGame();
+        resetScoreboard();
+      }
+      
+      // The "quick match" button was pressed.
+      if (event.reportObject.index == BTN_QUICK_MATCH_IDX)
+      {
+        // Set the game up for a single round up to 8 points.
+        POINTS_PER_MATCH = 8;
+        TOURNAMENT_WIN_LIMIT = 1;
         
-        // Reset the scoreboard digits to 0.
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_SCORE_DIGIT_IDX, 0);
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_SCORE_DIGIT_IDX, 0);
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, BLACK_ROUND_DIGIT_IDX, 0);
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, YELLOW_ROUND_DIGIT_IDX, 0);
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_MINUTES_IDX, 0);
-        genieWriteObject(GENIE_OBJ_LED_DIGITS, CLOCK_SECONDS_IDX, 0);
+        // Reset the game variables.
+        initGame();
+        resetScoreboard();
+      }
+      
+      // The "quick tournament" button was pressed.
+      if (event.reportObject.index == BTN_QUICK_TOURNAMENT_IDX)
+      {
+        // Set up the game for a tournament, best of 5, 5 points per match.
+        POINTS_PER_MATCH = 5;
+        TOURNAMENT_WIN_LIMIT = 3;
         
-        genieWriteObject(GENIE_OBJ_FORM, 0, 0);  // Select form 0 (the scoreboard).
-        genieWriteStr(0, "Ready");
+        // Reset the game variables.
+        initGame();
+        resetScoreboard();
       }
     }
   }
