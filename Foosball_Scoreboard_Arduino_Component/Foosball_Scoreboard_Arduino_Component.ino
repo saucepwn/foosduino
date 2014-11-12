@@ -53,11 +53,34 @@ const int BLACK = 1;
 
 typedef struct
 {
+  int smb_po1;
+  int smb_wo;
+  int smb_st;
+  int ks_15_killjoy;
+  int ks_14_extermination;
+  int ks_13_un_friggin_believable;
+  int ks_12_inconceivable;
+  int ks_11_invincible;
+  int ks_10_untoucable;
+  int ks_9_rampage;
+  int ks_8_running_riot;
+  int ks_7_killing_frenzy;
+  int ks_6_killing_spree;
+  int ks_5_killtacular;
+  int ks_4_overkill;
+  int ks_3_triple_kill;
+  int ks_2_double_kill;
+  int error;
+} sounds;
+
+sounds soundMap;
+
+typedef struct
+{
   int matchScore;
   int totalScore;
   int matchesWon;
-} 
-player;
+} player;
 
 player playerData[2];
 
@@ -76,6 +99,26 @@ void setup()
   // Set up ball insert pins (beam break sensors)
   pinMode(ballInsert1, INPUT);
   pinMode(ballInsert2, INPUT);
+  
+  // Initialize the sound map.
+  soundMap.smb_po1 = 0;
+  soundMap.smb_wo = 1;
+  soundMap.smb_st = 2;
+  soundMap.ks_15_killjoy = 3;
+  soundMap.ks_14_extermination = 4;
+  soundMap.ks_13_un_friggin_believable = 5;
+  soundMap.ks_12_inconceivable = 6;
+  soundMap.ks_11_invincible = 7;
+  soundMap.ks_10_untoucable = 8;
+  soundMap.ks_9_rampage = 9;
+  soundMap.ks_8_running_riot = 10;
+  soundMap.ks_7_killing_frenzy = 11;
+  soundMap.ks_6_killing_spree = 12;
+  soundMap.ks_5_killtacular = 13;
+  soundMap.ks_4_overkill = 14;
+  soundMap.ks_3_triple_kill = 15;
+  soundMap.ks_2_double_kill = 16;
+  soundMap.error = 17;
 
   initGame();
   initDisplay();

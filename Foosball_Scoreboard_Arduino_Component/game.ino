@@ -48,7 +48,7 @@ void registerScore(int color)
   else
   {
     // Index 0 means play sound, sound 0 is the goal score sound.
-    genieWriteObject(GENIE_OBJ_SOUND, 0, 0);
+    genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.smb_po1);
   }
 }
 
