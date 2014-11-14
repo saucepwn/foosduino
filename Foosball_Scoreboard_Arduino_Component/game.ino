@@ -14,7 +14,7 @@ void registerScore(int color)
   // Eliminate score streak for opposing player.
   playerData[ getArrayIndexForColor(!invertedRound, color) ].streak = 0;
   
-  int streak = playerData[ getArrayIndexForColor(invertedRound, color) ].streak++;
+  int streak = ++playerData[ getArrayIndexForColor(invertedRound, color) ].streak;
   int score = ++playerData[ getArrayIndexForColor(invertedRound, color) ].matchScore;
   
   if (color == BLACK)
@@ -24,7 +24,7 @@ void registerScore(int color)
     // Light up the ball insert pin for the team that was just scored on.
     if (score != POINTS_PER_MATCH)
     {
-      //genieWriteStr(0, "Black scores!");
+      genieWriteStr(0, "Black scores!");
       digitalWrite(yellowInsertLightPin, HIGH);
     }
   }
@@ -35,7 +35,7 @@ void registerScore(int color)
     // Light up the ball insert pin for the team that was just scored on.
     if (score != POINTS_PER_MATCH)
     {
-      //genieWriteStr(0, "Yellow scores!");
+      genieWriteStr(0, "Yellow scores!");
       digitalWrite(blackInsertLightPin, HIGH);
     }
   }
@@ -105,12 +105,12 @@ void updateMatchScores()
   // Tell the player who should put the ball in.
   if (colorWinner == YELLOW)
   {
-    //genieWriteStr(0, "Ready.\nYellow, put in ball.");
+    genieWriteStr(0, "Ready.\nYellow, put in ball.");
     digitalWrite(yellowInsertLightPin, HIGH);
   }
   else
   {
-    //genieWriteStr(0, "Ready.\nBlack, put in ball.");
+    genieWriteStr(0, "Ready.\nBlack, put in ball.");
     digitalWrite(blackInsertLightPin, HIGH);
   }
   
