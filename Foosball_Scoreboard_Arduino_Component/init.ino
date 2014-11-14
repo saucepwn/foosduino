@@ -10,8 +10,8 @@ void initGame()
   invertedRound = false;
   totalGameSeconds = 0;
   insertInProgress = false;
-  playerData[0] = (player) {0, 0, 0};
-  playerData[1] = (player) {0, 0, 0};
+  playerData[0] = (player) {0, 0, 0, 0};
+  playerData[1] = (player) {0, 0, 0, 0};
 }
 
 /**

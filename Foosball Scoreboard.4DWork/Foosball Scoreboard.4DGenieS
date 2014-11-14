@@ -1,6 +1,6 @@
 #platform "uLCD-43PT"
 
-// generated 5/26/2014 6:51:46 PM
+// generated 11/13/2014 9:13:47 PM
 
 #MODE RUNFLASH
 
@@ -187,13 +187,27 @@
                 148, 2, 1, 43, 0,
                 244, 2, 1, 43, 0
     byte Sounds "smb_po!1.wav", 0,
-                "error_!1.wav", 0,
+                "smb_wo!1.wav", 0,
                 "smb_st!1.wav", 0,
-                "smb_wo!1.wav", 0
+                "15_kil!1.wav", 0,
+                "14_ext!1.wav", 0,
+                "13_un-!1.wav", 0,
+                "12_inc!1.wav", 0,
+                "11_inv!1.wav", 0,
+                "10_unt!1.wav", 0,
+                "9_ramp!1.wav", 0,
+                "8_runn!1.wav", 0,
+                "7_kill!1.wav", 0,
+                "6_kill!1.wav", 0,
+                "5_kill!1.wav", 0,
+                "4_over!1.wav", 0,
+                "3_trip!1.wav", 0,
+                "2_doub!1.wav", 0,
+                "error_!1.wav", 0
 #END
 
 var hFonts[1] ;
-var iSounds[4] ;
+var iSounds[18] ;
 var stringsCV[1] := [0], hstrings ;
 // Start P2.inc
 var oObjects[MaxTotObjects+1] ;                 // address of objects
@@ -233,7 +247,8 @@ func ReadObject(var ObjectType, var ObjectIdx)
         k := snd_Playing();             // only a code of 0 is valid, return playing block regardless
         else
         k := img_GetWord(hndl, *j, IMAGE_INDEX);
-        if (((ObjectType == tWinButton) || (ObjectType == tAniButton) || (ObjectType == tUserButton) || (ObjectType == t4Dbutton)) && (k)) k := 1 ;
+        if (((ObjectType == tWinButton) || (ObjectType == tAniButton) || (ObjectType == tUserButton) || (ObjectType == t4Dbutton)) && (k)) k := 1 ; // this is not correct for blocked buttons and cannot be fixed as we cannot 
+                                                                                                                                                    // determine if button is momentary or not which is needed for correct answer.
     endif
     seroutCS(k >> 8) ; // first 8 bits
     seroutCS(k) ;
@@ -242,7 +257,7 @@ endfunc
 
 
 func WriteObject(var ObjectType, var ObjectIdx, var NewVal)
-    var i, j, Objects ;
+    var i, j, k, Objects ;
     ObjectType &= 0x3f ;
     if (ObjectType == tForm)
         ActivateForm(ObjectIdx) ;
@@ -256,8 +271,19 @@ func WriteObject(var ObjectType, var ObjectIdx, var NewVal)
             default : j := -1 ;
         endswitch
         if (j != -1) 
-            if (*(j+IPData+IPD_P2) != -1) TurnOffButtons(*(j+IPData+IPD_P2)) ;
-            NewVal := NewVal << 1 ;
+            k := img_GetWord(hndl, i , IMAGE_INDEX) ;
+            NewVal := NewVal << 1 ;  
+            if (OVF())      // button group index change
+                if (*(j+IPData+IPD_P1))   
+                    k &= 1 ;    // mask off old group index for momentary
+                else
+                    k &= 3 ;    // mask off old group index for toggle
+                endif
+            else            // normal set
+                if (*(j+IPData+IPD_P2) != -1) TurnOffButtons(*(j+IPData+IPD_P2)) ;
+                k &= 0xfffc ;    // retain only group index for state set
+            endif
+            NewVal |= k ;
         endif
          if (ObjectType == tLeddigits)
             img_SetWord(hndl, i , IMAGE_TAG2, NewVal); // where state is 0 to 2
@@ -384,7 +410,14 @@ func UpdateObjects(var newval)
 
         img_SetWord(hndl, *(object), IMAGE_INDEX, newval);
             img_Show(hndl, *(object));      // only shows on current form
-        if (((inputtype == t4Dbutton) || (inputtype == tUserButton) || (inputtype == tWinButton) || (inputtype == tAniButton) )&& (newval > 1)) newval := 1;
+        if ((inputtype == t4Dbutton) || (inputtype == tUserButton) || (inputtype == tWinButton)) 
+            if (*(input+IPD_P1))
+                newval &= 1;
+            else
+                newval &= 3;
+            endif
+            if (newval > 1) newval := 1;
+        endif
         IPidx := *(input+TState) ;
         while(IPidx != 0)
             otherOBJ := IPidx + IPData;
@@ -465,7 +498,7 @@ func main()
     gfx_ScreenMode(LANDSCAPE) ;
 
     // open image control
-    hndl := file_LoadImageControl("FOOSBA~2.dat", "FOOSBA~2.gci", 1);
+    hndl := file_LoadImageControl("FAMWO2~Z.dat", "FAMWO2~Z.gci", 1);
 
     // init 'constants'
 // End P3.inc
@@ -507,9 +540,23 @@ func main()
     iSounds[1] := Sounds + 13 ;
     iSounds[2] := Sounds + 26 ;
     iSounds[3] := Sounds + 39 ;
-    hFonts[0] := file_LoadImageControl("FOOSBA~2.da1", "FOOSBA~2.gc1", 1)  ;
+    iSounds[4] := Sounds + 52 ;
+    iSounds[5] := Sounds + 65 ;
+    iSounds[6] := Sounds + 78 ;
+    iSounds[7] := Sounds + 91 ;
+    iSounds[8] := Sounds + 104 ;
+    iSounds[9] := Sounds + 117 ;
+    iSounds[10] := Sounds + 130 ;
+    iSounds[11] := Sounds + 143 ;
+    iSounds[12] := Sounds + 156 ;
+    iSounds[13] := Sounds + 169 ;
+    iSounds[14] := Sounds + 182 ;
+    iSounds[15] := Sounds + 195 ;
+    iSounds[16] := Sounds + 208 ;
+    iSounds[17] := Sounds + 221 ;
+    hFonts[0] := file_LoadImageControl("FAMWO2~Z.da1", "FAMWO2~Z.gc1", 1)  ;
 // Start P4.inc
-    hstrings := file_Open("FOOSBA~2.txf", 'r') ; // Open handle to access uSD strings, uncomment if required
+    hstrings := file_Open("FAMWO2~Z.txf", 'r') ; // Open handle to access uSD strings, uncomment if required
     // init comms
     com_Init(comRX,CMDLenMAX,0);
     com_SetBaud(COM0,11520);
@@ -683,18 +730,22 @@ cUserButton:
 cWinbutton:
     object := oWinButtons + *(input+IPD_OBJVidx) ;
 gbutton:
+    i := img_GetWord(hndl, *(object), IMAGE_INDEX) ; // current state
     if (*(input+IPD_P1))                                 // momentary, reports 0, but should report 1
         if (state == TOUCH_RELEASED)
-            i := 0 ;
+            i &= 0xfffe ;
             TState == IPD_DOWN ;
         else
-            i := 1 ;
+            i |= 1 ;
             TState == IPD_RELEASE ;
         endif
     else if (*(input+IPD_P2) == -1)                      // Toggle, reports 0+2, but should report 0+1
-        i := img_GetWord(hndl, *(object), IMAGE_INDEX) ; // current state
         if (state == TOUCH_RELEASED)                     // only truly change on release
-            i := ++i & 3 ;
+            if ((i & 3) == 3)
+                i &= 0xfffc ;
+            else
+                i++ ;
+            endif
         else
             i |= 1 ;                                      // make down regardless of current state
         endif
@@ -702,7 +753,7 @@ gbutton:
         if (state == TOUCH_PRESSED)                     // only truly change on release
             TurnOffButtons(*(input+IPD_P2)) ;
         endif
-    i := 2 ;
+        i := (i & 0xfffc) | 2 ;
     endif
 
     UpdateObjects(i) ;

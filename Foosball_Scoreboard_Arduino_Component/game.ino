@@ -9,7 +9,12 @@
 void registerScore(int color)
 {
   stopClock(false);
-  ballInPlay = 0;
+  ballInPlay = false;
+  
+  // Eliminate score streak for opposing player.
+  playerData[ getArrayIndexForColor(!invertedRound, color) ].streak = 0;
+  
+  int streak = playerData[ getArrayIndexForColor(invertedRound, color) ].streak++;
   int score = ++playerData[ getArrayIndexForColor(invertedRound, color) ].matchScore;
   
   if (color == BLACK)
@@ -47,8 +52,7 @@ void registerScore(int color)
   }
   else
   {
-    // Index 0 means play sound, sound 0 is the goal score sound.
-    genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.smb_po1);
+    playStreakSound(streak);
   }
 }
 
@@ -84,7 +88,7 @@ void updateMatchScores()
   playerData[1].totalScore += playerData[1].matchScore;
   
   // Play the match winning sound.
-  genieWriteObject(GENIE_OBJ_SOUND, 0, 2);
+  genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.match_win);
   delay(AFTER_ROUND_PAUSE_MSEC);
   
   // End the tournament if somebody won.
@@ -145,7 +149,7 @@ void endTournament()
   genieWriteStr(0, "Good game!");
   
   // Play the tournament win sound & show the stats form.
-  genieWriteObject(GENIE_OBJ_SOUND, 0, 3);
+  genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.tournament_win);
   
   // Populate & show the postgame stats form.
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 6, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].totalScore);

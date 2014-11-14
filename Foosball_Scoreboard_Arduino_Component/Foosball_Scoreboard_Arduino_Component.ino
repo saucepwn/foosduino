@@ -18,7 +18,7 @@ const int ballInsertThreshold = 250;
 boolean insertInProgress = false;
 
 /* Game status variables. */
-int ballInPlay = 0;
+boolean ballInPlay = false;
 boolean invertedRound = false;               // Set to false when player 0 is yellow. Set to true when player 0 is black.
 int totalGameSeconds = 0;
 
@@ -53,9 +53,9 @@ const int BLACK = 1;
 
 typedef struct
 {
-  int smb_po1;
-  int smb_wo;
-  int smb_st;
+  int score;
+  int match_win;
+  int tournament_win;
   int ks_15_killjoy;
   int ks_14_extermination;
   int ks_13_un_friggin_believable;
@@ -80,6 +80,7 @@ typedef struct
   int matchScore;
   int totalScore;
   int matchesWon;
+  int streak;
 } player;
 
 player playerData[2];
@@ -101,9 +102,9 @@ void setup()
   pinMode(ballInsert2, INPUT);
   
   // Initialize the sound map.
-  soundMap.smb_po1 = 0;
-  soundMap.smb_wo = 1;
-  soundMap.smb_st = 2;
+  soundMap.score = 0;
+  soundMap.match_win = 1;
+  soundMap.tournament_win = 2;
   soundMap.ks_15_killjoy = 3;
   soundMap.ks_14_extermination = 4;
   soundMap.ks_13_un_friggin_believable = 5;
@@ -127,8 +128,8 @@ void setup()
 void loop()
 {
   // Either poll for a score or a ball in play, depending on whether or not a ball is in play.
-  if (ballInPlay == 0) pollForBallInsert();
-  else pollForScore();
+  if (ballInPlay) pollForScore();
+  else pollForBallInsert();
 
   // Receive touch events from LCD panel.
   genieDoEvents();
@@ -181,7 +182,7 @@ void pollForBallInsert()
     }
     else
     {
-      ballInPlay = 1;
+      ballInPlay = true;
       genieWriteStr(0, "Ball is in play");
       digitalWrite(yellowInsertLightPin, LOW);
       digitalWrite(blackInsertLightPin, LOW);
