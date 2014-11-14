@@ -202,7 +202,7 @@ StaticText
 end
 Sounds
     Name                         Sounds0
-    WavFiles                     smb_po!1.wav\nerror_!1.wav\n2_doub!1.wav\n3_trip!1.wav\n4_over!1.wav\n5_kill!1.wav\n6_kill!1.wav\n7_kill!1.wav\n8_runn!1.wav\n9_ramp!1.wav\n10_unt!1.wav\n11_inv!1.wav\n12_inc!1.wav\n13_un-!1.wav\n14_ext!1.wav\n15_kil!1.wav\nsmb_st!1.wav\nsmb_wo!1.wav
+    WavFiles                     smb_po!1.wav\nsmb_wo!1.wav\nsmb_st!1.wav\n15_kil!1.wav\n14_ext!1.wav\n13_un-!1.wav\n12_inc!1.wav\n11_inv!1.wav\n10_unt!1.wav\n9_ramp!1.wav\n8_runn!1.wav\n7_kill!1.wav\n6_kill!1.wav\n5_kill!1.wav\n4_over!1.wav\n3_trip!1.wav\n2_doub!1.wav\nerror_!1.wav
     OnPlayingChanged             ''
     OnVolumeChanged              ''
 end
