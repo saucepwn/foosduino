@@ -167,7 +167,7 @@ void pollForBallInsert()
     {
       // Show the ball stuck warning.
       genieWriteObject(GENIE_OBJ_FORM, 2, 0);
-      genieWriteObject(GENIE_OBJ_SOUND, 0, 1);
+      genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.error);
       
       // Trap execution here until the ball gets unstuck.
       while (true)
