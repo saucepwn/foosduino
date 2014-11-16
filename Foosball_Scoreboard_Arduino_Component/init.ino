@@ -8,10 +8,11 @@
 void initGame()
 {
   invertedRound = false;
+  activeGame = true;
   totalGameSeconds = 0;
   insertInProgress = false;
-  playerData[0] = (player) {0, 0, 0, 0};
-  playerData[1] = (player) {0, 0, 0, 0};
+  playerData[0] = (player) {0, 0, 0, 0, 0};
+  playerData[1] = (player) {0, 0, 0, 0, 0};
 }
 
 /**
@@ -28,9 +29,9 @@ void initDisplay()
   delay(100);
   digitalWrite(displayResetPin, 0);
 
-  delay(1500);  
+  delay(1000);  
   genieBegin(GENIE_SERIAL, 115200);
-  delay(1500);
+  delay(1000);
   
   genieAttachEventHandler(myEventHandler);
   

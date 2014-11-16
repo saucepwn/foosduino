@@ -19,19 +19,20 @@ boolean insertInProgress = false;
 
 /* Game status variables. */
 boolean ballInPlay = false;
-boolean invertedRound = false;               // Set to false when player 0 is yellow. Set to true when player 0 is black.
+boolean invertedRound = false;           // Set to false when player 0 is yellow. Set to true when player 0 is black.
+boolean activeGame = false;              // Set to true when a game is in progress. False when the menus are being navigated.
 int totalGameSeconds = 0;
 
 /* Clock variables / config */
-const long UPDATE_CLOCK_CYCLES = 10000;      // Check for the update clock flag every 10,000 cycles.
+const long UPDATE_CLOCK_CYCLES = 10000;  // Check for the update clock flag every 10,000 cycles.
 long loopCycleCount = 0;
 volatile boolean updateClockFlag = false;
 
 /* Game config variables. */
 int POINTS_PER_MATCH = 5;
-int TOURNAMENT_WIN_LIMIT = 3;          // How many games a player has to win before winning the tournament.
-const int AFTER_ROUND_PAUSE_MSEC = 7000;     // The amount of time to freeze the scoreboard after each round, in milliseconds.
-const int SOUND_VOLUME = 127;                // The volume of the sounds. Range [0, 127]
+int TOURNAMENT_WIN_LIMIT = 3;            // How many games a player has to win before winning the tournament.
+const int AFTER_ROUND_PAUSE_MSEC = 7000; // The amount of time to freeze the scoreboard after each round, in milliseconds.
+const int SOUND_VOLUME = 127;            // The volume of the sounds. Range [0, 127]
 
 /* LCD config variables. */
 const int YELLOW_SCORE_DIGIT_IDX = 0;
@@ -81,6 +82,7 @@ typedef struct
   int totalScore;
   int matchesWon;
   int streak;
+  int longestStreak;
 } player;
 
 player playerData[2];
@@ -128,8 +130,11 @@ void setup()
 void loop()
 {
   // Either poll for a score or a ball in play, depending on whether or not a ball is in play.
-  if (ballInPlay) pollForScore();
-  else pollForBallInsert();
+  if (activeGame)
+  {
+    if (ballInPlay) pollForScore();
+    else pollForBallInsert();
+  }
 
   // Receive touch events from LCD panel.
   genieDoEvents();

@@ -15,6 +15,13 @@ void registerScore(int color)
   playerData[ getArrayIndexForColor(!invertedRound, color) ].streak = 0;
   
   int streak = ++playerData[ getArrayIndexForColor(invertedRound, color) ].streak;
+  int longestStreak = playerData[ getArrayIndexForColor(invertedRound, color) ].longestStreak;
+  
+  if (streak > longestStreak)
+  {
+    playerData[ getArrayIndexForColor(invertedRound, color) ].longestStreak = streak;
+  }
+  
   int score = ++playerData[ getArrayIndexForColor(invertedRound, color) ].matchScore;
   
   if (color == BLACK)
@@ -146,7 +153,7 @@ int getArrayIndexForColor(boolean inverted, int color)
  */
 void endTournament()
 {
-  genieWriteStr(0, "Good game!");
+  activeGame = false;
   
   // Play the tournament win sound & show the stats form.
   genieWriteObject(GENIE_OBJ_SOUND, 0, soundMap.tournament_win);
@@ -156,6 +163,8 @@ void endTournament()
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 7, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].totalScore);
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 8, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].matchesWon);
   genieWriteObject(GENIE_OBJ_LED_DIGITS, 9, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].matchesWon);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 12, playerData[ getArrayIndexForColor(invertedRound, YELLOW) ].longestStreak);
+  genieWriteObject(GENIE_OBJ_LED_DIGITS, 13, playerData[ getArrayIndexForColor(invertedRound, BLACK) ].longestStreak);
 
   // Make sure we don't divide by zero on the line below.  
   if (playerData[0].totalScore == 0 && playerData[1].totalScore == 0)

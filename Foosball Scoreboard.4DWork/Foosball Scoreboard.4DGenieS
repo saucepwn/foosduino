@@ -1,6 +1,6 @@
 #platform "uLCD-43PT"
 
-// generated 11/13/2014 9:13:47 PM
+// generated 11/16/2014 3:55:38 PM
 
 #MODE RUNFLASH
 
@@ -116,15 +116,15 @@
     REPORT_OBJ      5
     REPORT_EVENT    7
 // End P1.inc
-    nObjects        38
+    nObjects        43
     nInputs         12
     ANITIMERS       0
 #END
 
 #DATA
-    word formstidx 0, 14, 32, 33
-    word formenidx 14, 32, 33, 38
-    word IPControls -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 44, -1, 88, 132, 176, 220
+    word formstidx 0, 14, 37, 38
+    word formenidx 14, 37, 38, 43
+    word IPControls -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 44, -1, -1, -1, -1, -1, -1, -1, 88, 132, 176, 220
     word IPData tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 22, 2,
                 OT_REPORT, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 tWinButton, 1, -1, -1, -1, -1, -1, -1, 0, 66, 4,
@@ -153,13 +153,13 @@
     word oImages 0
     word oKeyboards 0
     word oLeds 0
-    word oLeddigitss 12, iLeddigits0, iLeddigits1, iLeddigits2, iLeddigits3, iLeddigits4, iLeddigits5, iLeddigits6, iLeddigits7, iLeddigits8, iLeddigits9, iLeddigits10, iLeddigits11
+    word oLeddigitss 14, iLeddigits0, iLeddigits1, iLeddigits2, iLeddigits3, iLeddigits4, iLeddigits5, iLeddigits6, iLeddigits7, iLeddigits8, iLeddigits9, iLeddigits10, iLeddigits11, iLeddigits12, iLeddigits13
     word oMeters 0
     word oStringss 1, iStrings0
     word oThermometers 0
     word oUserleds 0
     word oVideos 0
-    word oStaticTexts 8, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6, iStatictext7
+    word oStaticTexts 9, iStatictext0, iStatictext1, iStatictext2, iStatictext3, iStatictext4, iStatictext5, iStatictext6, iStatictext7, iStatictext8
     word oSpectrums 0
     word oScopes 0
     word oTanks 0
@@ -180,12 +180,14 @@
                 272, 1, 1, 79, 0,
                 152, 2, 1, 43, 0,
                 248, 2, 1, 43, 0,
-                8, 2, 1, 64, 0,
-                352, 2, 1, 64, 0,
+                8, 2, 1, 40, 1,
+                395, 2, 1, 40, 1,
                 12, 1, 1, 79, 0,
                 400, 1, 1, 79, 0,
                 148, 2, 1, 43, 0,
-                244, 2, 1, 43, 0
+                244, 2, 1, 43, 0,
+                12, 2, 1, 35, 1,
+                400, 2, 1, 35, 1
     byte Sounds "smb_po!1.wav", 0,
                 "smb_wo!1.wav", 0,
                 "smb_st!1.wav", 0,
@@ -468,11 +470,7 @@ func DoGFXObjects()
         case 1:
             gfx_OutlineColour(WHITE) ;
             gfx_LinePattern(LPFINE) ;
-            gfx_RectangleFilled(141, 77, 340, 81, WHITE) ;
-            gfx_OutlineColour(BLACK) ;
-            gfx_OutlineColour(WHITE) ;
-            gfx_LinePattern(LPFINE) ;
-            gfx_RectangleFilled(175, 124, 303, 129, WHITE) ;
+            gfx_RectangleFilled(0, 67, 478, 71, WHITE) ;
             gfx_OutlineColour(BLACK) ;
         break ;
     endswitch
