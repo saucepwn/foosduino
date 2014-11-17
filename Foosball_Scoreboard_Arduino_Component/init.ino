@@ -29,9 +29,9 @@ void initDisplay()
   delay(100);
   digitalWrite(displayResetPin, 0);
 
-  delay(1000);  
+  delay(1500);  
   genieBegin(GENIE_SERIAL, 115200);
-  delay(1000);
+  delay(1500);
   
   genieAttachEventHandler(myEventHandler);
   
